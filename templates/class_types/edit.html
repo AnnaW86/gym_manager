@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/class_types/{{ class_type.id }}" method="post">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" value="{{ class_type.title }}" required autofocus>
+    </div>
+    <div>
+        <label for="Intensity">Intensity:</label>
+        <input type="number" name="intensity" id="intensity" value="{{ class_type.intensity }}" required>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" value="{{ class_type.description }}" required>
+    </div>
+    <div class="form_button">
+        <button type="submit">Update {{ class_type.title }}</button>
+    </div>
+</form>
+
+{% endblock content %}
+

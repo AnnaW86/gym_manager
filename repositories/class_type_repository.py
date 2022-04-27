@@ -37,3 +37,12 @@ def select(id):
     if result is not None:
         class_type = ClassType(result['title'], result['intensity'], result['description'], result['id'])
     return class_type
+
+def update(class_type):
+    sql = """
+        UPDATE class_types
+        SET (title, intensity, description) = (%s, %s, %s)
+        WHERE id = %s
+    """
+    values = [class_type.title, class_type.intensity, class_type.description, class_type.id]
+    run_sql(sql, values)

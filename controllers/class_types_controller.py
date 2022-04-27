@@ -29,3 +29,18 @@ def create_class_type():
 @class_types_blueprint.route("/class_types/<id>")
 def show_class_type(id):
     return render_template("class_types/show.html", class_type = class_type_repository.select(id))
+
+# EDIT
+@class_types_blueprint.route("/class_types/<id>/edit")
+def edit_class_type(id):
+    return render_template("class_types/edit.html", class_type = class_type_repository.select(id))
+
+# UPDATE
+@class_types_blueprint.route("/class_types/<id>", methods=['POST'])
+def update_class_type(id):
+    title = request.form['title']
+    intensity = request.form['intensity']
+    description = request.form['description']
+    class_type = ClassType(title, intensity, description, id)
+    class_type_repository.update(class_type)
+    return redirect(f"/class_types/{id}")
