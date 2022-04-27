@@ -1,5 +1,6 @@
 from db.run_sql import run_sql
 from models.gym_class import GymClass
+from repositories import class_type_repository, start_time_repository, location_repository
 
 def save(gym_class):
     sql = """
@@ -15,3 +16,17 @@ def save(gym_class):
 def delete_all():
     sql = "DELETE FROM gym_classes"
     run_sql(sql)
+
+def select_all():
+    gym_classes = []
+    sql = "SELECT * FROM gym_classes"
+    results = run_sql(sql)
+    for row in results:
+        class_type = class_type_repository.select(row['class_type_id'])
+        start_time = start_time_repository.select(row['start_time_id'])
+        location = location_repository.select(row['location_id'])
+        gym_class = GymClass(class_type, start_time, row['duration'],location, row['id'])
+        gym_classes.append(gym_class)
+    return gym_classes
+
+

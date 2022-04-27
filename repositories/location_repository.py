@@ -15,3 +15,15 @@ def save(location):
 def delete_all():
     sql = "DELETE FROM locations"
     run_sql(sql)
+
+def select(id):
+    location = None
+    sql = """
+        SELECT * FROM locations
+        WHERE id = %s
+    """
+    values = [id]
+    result = run_sql(sql, values)[0]
+    if result is not None:
+        location = Location(result['name'], result['id'])
+    return location
