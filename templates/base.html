@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>The Gym</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <button class="dropbtn">
+                        <a href="/"><span class="material-icons">home</span></a>
+                    </button>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn"> Members</button>
+                        <div class="dropdown-content">
+                            <a href="/members">View all members</a>
+                            <a href="/members/new">Add new members</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn"> Classes</button>
+                        <div class="dropdown-content">
+                            <a href="/gym_classes">View all classes</a>
+                            <a href="/gym_classes/new">Add new classes</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+      </div>
+      <div class="container">
+        {%block home%}
+        {% endblock %}
+      </div>
+
+</body>
+</html>

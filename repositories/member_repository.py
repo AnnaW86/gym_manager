@@ -1,3 +1,4 @@
+from cProfile import run
 from db.run_sql import run_sql
 from models.member import Member
 
@@ -15,3 +16,12 @@ def save(member):
 def delete_all():
     sql = "DELETE FROM members"
     run_sql(sql)
+
+def select_all():
+    members = []
+    sql = "SELECT * FROM members"
+    results = run_sql(sql)
+    for row in results:
+        member = Member(row['first_name'], row['last_name'], row['membership_number'], row['id'])
+        members.append(member)
+    return members
