@@ -2,9 +2,11 @@ from models.member import Member
 from models.class_type import ClassType
 from models.location import Location
 from models.start_time import StartTime
+from models.gym_class import GymClass
 
-from repositories import member_repository, class_type_repository, location_repository, start_time_repository
+from repositories import member_repository, class_type_repository, location_repository, start_time_repository, gym_class_repository
 
+gym_class_repository.delete_all()
 member_repository.delete_all()
 class_type_repository.delete_all()
 location_repository.delete_all()
@@ -70,3 +72,24 @@ start_times = [am6,am7,am8,am9,am10,am11,pm12,pm1,pm2,pm3,pm4,pm5,pm6,pm7,pm8,pm
 
 for time in start_times:
     start_time_repository.save(time)
+
+class1 = GymClass(spin, am6, 30, location1)
+class2 = GymClass(spin, am7, 30, location1)
+class3 = GymClass(spin, am11, 45, location1)
+class4 = GymClass(spin, pm2, 45, location1)
+class5 = GymClass(spin, pm5, 45, location1)
+class6 = GymClass(spin, pm6, 30, location1)
+class7 = GymClass(pilates, am8, 25, location2)
+class8 = GymClass(pilates, am9, 25, location2)
+class9 = GymClass(pilates, am10, 40, location2)
+class10 = GymClass(pilates, pm12, 40, location2)
+class11 = GymClass(pilates, pm3, 30, location2)
+class12 = GymClass(hiit, am11, 30, location2)
+class13 = GymClass(hiit, pm5, 30, location2)
+class14 = GymClass(hiit, pm8, 45, location2)
+class15 = GymClass(aquafit, pm1, 30, location3)
+
+gym_classes = [class1, class2, class3, class4, class5, class6, class7, class8, class9, class10, class11, class12, class13, class14, class15]
+
+for gym_class in gym_classes:
+    gym_class_repository.save(gym_class)
