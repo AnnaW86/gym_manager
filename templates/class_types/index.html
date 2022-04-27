@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Available Classes</h1>
+
+<ul>
+    {% for class_type in class_types %}
+        <div>
+            <a href="/class_types/{{ class_type.id }}">{{ class_type.title }}</a>
+            <hr>
+            <p>{{ class_type.intensity }}</p>
+            <p>{{ class_type.description }} </p>
+        </div>   
+    {% endfor %}
+</ul>
+
+{% endblock content %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request
+from flask import Blueprint, render_template, request, redirect
 
 from models.member import Member
 from repositories import member_repository

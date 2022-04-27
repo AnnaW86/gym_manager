@@ -16,3 +16,12 @@ def save(class_type):
 def delete_all():
     sql = "DELETE FROM class_types"
     run_sql(sql)
+
+def select_all():
+    class_types = []
+    sql = "SELECT * FROM class_types"
+    results = run_sql(sql)
+    for row in results:
+        class_type = ClassType(row['title'], row['intensity'], row['description'], row['id'])
+        class_types.append(class_type)
+    return class_types
