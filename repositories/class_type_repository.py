@@ -25,3 +25,15 @@ def select_all():
         class_type = ClassType(row['title'], row['intensity'], row['description'], row['id'])
         class_types.append(class_type)
     return class_types
+
+def select(id):
+    class_type = None
+    sql = """
+        SELECT * FROM class_types
+        WHERE id = %s
+    """
+    values = [id]
+    result = run_sql(sql, values)[0]
+    if result is not None:
+        class_type = ClassType(result['title'], result['intensity'], result['description'], result['id'])
+    return class_type

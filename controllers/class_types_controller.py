@@ -24,3 +24,8 @@ def create_class_type():
     class_type = ClassType(title, intensity, description)
     class_type_repository.save(class_type)
     return redirect('/class_types')
+
+# SHOW
+@class_types_blueprint.route("/class_types/<id>")
+def show_class_type(id):
+    return render_template("class_types/show.html", class_type = class_type_repository.select(id))
