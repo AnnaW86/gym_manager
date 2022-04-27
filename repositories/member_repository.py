@@ -25,3 +25,12 @@ def select_all():
         member = Member(row['first_name'], row['last_name'], row['membership_number'], row['id'])
         members.append(member)
     return members
+
+def update(member):
+    sql = """
+        UPDATE members
+        SET (first_name, last_name, membership_number) = (%s, %s, %s)
+        WHERE id = %s
+    """
+    values = [member.first_name, member.last_name, member.membership_number, member.id]
+    run_sql(sql)
