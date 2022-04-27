@@ -33,7 +33,7 @@ def update(member):
         WHERE id = %s
     """
     values = [member.first_name, member.last_name, member.membership_number, member.id]
-    run_sql(sql)
+    run_sql(sql, values)
 
 def select(id):
     member = None

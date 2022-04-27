@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/members/{{ member.id }}" method="post">
+    <div>
+        <label for="first_name">First name:</label>
+        <input type="text" name="first_name" id="first_name" value="{{ member.first_name }}" required autofocus>
+    </div>
+    <div>
+        <label for="last_name">Last name:</label>
+        <input type="text" name="last_name" id="last_name" value="{{ member.last_name }}" required>
+    </div>
+    <div>
+        <label for="membership_number">Membership number:</label>
+        <input type="number" name="membership_number" id="membership_number" value="{{ member.membership_number }}" required>
+    </div>
+    <div class="form_button">
+        <button type="submit">Update {{ member.get_full_name() }}</button>
+    </div>
+</form>
+
+{% endblock content %}
+

@@ -29,3 +29,20 @@ def create_member():
 @members_blueprint.route("/members/<id>")
 def show_member(id):
     return render_template("members/show.html", member = member_repository.select(id))
+
+# EDIT
+@members_blueprint.route("/members/<id>/edit")
+def edit_member(id):
+    member = member_repository.select(id)
+    return render_template("members/edit.html", member = member)
+
+# UPDATE
+@members_blueprint.route("/members/<id>", methods=['POST'])
+def update_member(id):
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    membership_number = request.form['membership_number']
+    member = Member(first_name, last_name, membership_number, id)
+    member_repository.update(member)
+    return render_template("members/show.html", member = member)
+
