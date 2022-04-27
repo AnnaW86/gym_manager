@@ -3,6 +3,7 @@ class Member:
         self.first_name = first_name
         self.last_name = last_name
         self.membership_number = membership_number
+        self.id = id
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"

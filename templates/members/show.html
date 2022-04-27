@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Member: {{ member.get_full_name() }}</p>
+<p>Membership Number: {{ member.membership_number }}</p>
+<a href="/members/{{ member.id }}/edit">edit</a>
+    
+{% endblock content %}
+
+
+<!-- <i class="material-icons"></i> -->

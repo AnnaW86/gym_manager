@@ -6,12 +6,12 @@ def save(member):
     sql = """
         INSERT INTO members (first_name, last_name, membership_number)
         VALUES (%s, %s, %s)
-        RETURNING id
+        RETURNING *
     """
     values = [member.first_name, member.last_name, member.membership_number]
     results = run_sql(sql, values)
     member.id = results[0]['id']
-    return member.id
+    return member
 
 def delete_all():
     sql = "DELETE FROM members"
@@ -34,3 +34,16 @@ def update(member):
     """
     values = [member.first_name, member.last_name, member.membership_number, member.id]
     run_sql(sql)
+
+def select(id):
+    member = None
+    sql = """
+        SELECT * FROM members
+        WHERE id = %s
+    """
+    values = [id]
+    result = run_sql(sql, values)[0]
+
+    if result is not None:
+        member = Member(result['first_name'], result['last_name'], result['membership_number'], result['id'])
+    return member

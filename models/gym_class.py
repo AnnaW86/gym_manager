@@ -4,3 +4,4 @@ class GymClass:
         self.start_time = start_time
         self.duration = duration
         self.location = location
+        self.id = id

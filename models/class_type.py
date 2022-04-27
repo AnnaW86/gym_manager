@@ -3,3 +3,4 @@ class ClassType:
         self.title = title
         self.intensity = intensity
         self.description = description
+        self.id = id
