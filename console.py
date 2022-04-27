@@ -1,10 +1,12 @@
 from models.member import Member
 from models.class_type import ClassType
+from models.location import Location
 
-from repositories import member_repository, class_type_repository
+from repositories import member_repository, class_type_repository, location_repository
 
 member_repository.delete_all()
 class_type_repository.delete_all()
+location_repository.delete_all()
 
 member1 = Member("Rachel", "Jones", 123456)
 member2 = Member("David", "Bates", 652143)
@@ -36,3 +38,10 @@ hiit = ClassType('HIIT', 5, 'High impact')
 class_type_repository.save(hiit)
 aquafit = ClassType('Aquafit', 2, 'Low impact strengthening')
 class_type_repository.save(aquafit)
+
+location1 = Location('Main gym')
+location_repository.save(location1)
+location2 = Location('Studio')
+location_repository.save(location2)
+location3 = Location('Pool')
+location_repository.save(location3)
