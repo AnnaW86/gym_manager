@@ -1,12 +1,14 @@
 from models.member import Member
 from models.class_type import ClassType
 from models.location import Location
+from models.start_time import StartTime
 
-from repositories import member_repository, class_type_repository, location_repository
+from repositories import member_repository, class_type_repository, location_repository, start_time_repository
 
 member_repository.delete_all()
 class_type_repository.delete_all()
 location_repository.delete_all()
+start_time_repository.delete_all()
 
 member1 = Member("Rachel", "Jones", 123456)
 member2 = Member("David", "Bates", 652143)
@@ -45,3 +47,26 @@ location2 = Location('Studio')
 location_repository.save(location2)
 location3 = Location('Pool')
 location_repository.save(location3)
+
+am6 = StartTime('6am')
+am7 = StartTime('7am')
+am8 = StartTime('8am')
+am9 = StartTime('9am')
+am10 = StartTime('10am')
+am11 = StartTime('11am')
+pm12 = StartTime('12pm')
+pm1 = StartTime('1pm')
+pm2 = StartTime('2pm')
+pm3 = StartTime('3pm')
+pm4 = StartTime('4pm')
+pm5 = StartTime('5pm')
+pm6 = StartTime('6pm')
+pm7 = StartTime('7pm')
+pm8 = StartTime('8pm')
+pm9 = StartTime('9pm')
+pm10 = StartTime('10pm')
+
+start_times = [am6,am7,am8,am9,am10,am11,pm12,pm1,pm2,pm3,pm4,pm5,pm6,pm7,pm8,pm9,pm10]
+
+for time in start_times:
+    start_time_repository.save(time)
