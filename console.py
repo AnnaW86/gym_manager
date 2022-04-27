@@ -1,8 +1,10 @@
 from models.member import Member
+from models.class_type import ClassType
 
-from repositories import member_repository
+from repositories import member_repository, class_type_repository
 
 member_repository.delete_all()
+class_type_repository.delete_all()
 
 member1 = Member("Rachel", "Jones", 123456)
 member2 = Member("David", "Bates", 652143)
@@ -24,3 +26,13 @@ members = [member1,member2,member3,member4,member5,member6,member7,member8,membe
 
 for member in members:
     member_repository.save(member)
+
+
+spin = ClassType('Spin', 4, 'Hard work')
+class_type_repository.save(spin)
+pilates = ClassType('Pilates', 2, 'Tone and strengthen')
+class_type_repository.save(pilates)
+hiit = ClassType('HIIT', 5, 'High impact')
+class_type_repository.save(hiit)
+aquafit = ClassType('Aquafit', 2, 'Low impact strengthening')
+class_type_repository.save(aquafit)

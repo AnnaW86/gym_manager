@@ -12,3 +12,7 @@ def save(class_type):
     results = run_sql(sql, values)
     class_type.id = results[0]['id']
     return class_type
+
+def delete_all():
+    sql = "DELETE FROM class_types"
+    run_sql(sql)
