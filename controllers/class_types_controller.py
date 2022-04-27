@@ -9,3 +9,8 @@ class_types_blueprint = Blueprint("class_types", __name__)
 @class_types_blueprint.route("/class_types")
 def class_types():
     return render_template("class_types/index.html", class_types = class_type_repository.select_all())
+
+# NEW
+@class_types_blueprint.route("/class_types/new")
+def new_class_type():
+    return render_template("class_types/new.html")
