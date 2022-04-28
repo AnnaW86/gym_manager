@@ -2,23 +2,23 @@
 
 {% block content %}
 
-<h1>Today's Classes</h1>
 
-<ul>
+<h1>Today's Classes</h1>
+<section>
     {% for gym_class in gym_classes %}
-        <div>
-            <a href="/gym_classes/{{ gym_class.id }}">{{ gym_class.class_type.title }}</a>
+    <a href="/gym_classes/{{ gym_class.id }}">
+        <section>
+            {{ gym_class.class_type.title }}
             <hr>
             <div>
                 <p>{{ gym_class.start_time.time }}</p>
                 <p>{{ gym_class.duration }} mins</p>
                 <p>In the {{ gym_class.location.name }}</p>
-            </div>
-            <div>
-
-            </div>
-        </div>   
+            </div>  
+        </section>
+    </a>    
     {% endfor %}
-</ul>
+</section>
+
 
 {% endblock content %}

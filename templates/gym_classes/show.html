@@ -1,30 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<p>Title: {{ gym_class.class_type.title }}</p>
-<p>Intensity: {{ gym_class.class_type.intensity }}</p>
-<p>Description: {{ gym_class.class_type.description }}</p>
-<p>When: {{ gym_class.start_time.time }}</p>
-<p>Where: {{gym_class.location.name }}</p>
-<ul>Attendees:
-    {% for attendee in attendees %}
-    <li>{{ attendee.get_full_name() }} <form action="{{ attendee.id }}/delete_booking" method='POST'>
-        <button>Remove</button>
-    </form> </li>
-        
-    {% endfor %}
-</ul>
-<form action="{{ gym_class.id }}/add_booking" method="post">
-    <label for="add_booking"> Add member to this class:</label>
-        <select name="add_booking" id="add_booking">
-            <option value="None">--</option>
-            {% for member in members %}
-                <option value="{{ member.id }}">{{ member.get_full_name() }}</option>            
+<section>
+    <section>
+        <p>Title: {{ gym_class.class_type.title }}</p>
+        <p>Intensity: {{ gym_class.class_type.intensity }}</p>
+        <p>Description: {{ gym_class.class_type.description }}</p>
+        <p>When: {{ gym_class.start_time.time }}</p>
+        <p>Where: {{gym_class.location.name }}</p>
+        <div class="attendee_list">
+            <p>Attendees:</p>
+            {% for attendee in attendees %}
+                <div class="attendee"> {{ attendee.get_full_name() }}
+                        <form action="{{ attendee.id }}/delete_booking" method='POST'>
+                        <button>Remove</button>
+                        </form>
+                </div>         
             {% endfor %}
-        </select>
-    <button type="submit">Add member</button>
-</form>
+        </div>
+        <form action="{{ gym_class.id }}/add_booking" method="post">
+            <label for="add_booking"> Add member to this class:</label>
+                <select name="add_booking" id="add_booking">
+                    <option value="None">--</option>
+                    {% for member in members %}
+                        <option value="{{ member.id }}">{{ member.get_full_name() }}</option>            
+                    {% endfor %}
+                </select>
+            <button type="submit">Add member</button>
+        </form>
+
+    </section>
+</section>
     
 {% endblock content %}
 

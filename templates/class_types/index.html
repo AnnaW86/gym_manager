@@ -4,15 +4,21 @@
 
 <h1>Available Classes</h1>
 
-<ul>
+<section>
     {% for class_type in class_types %}
-        <div>
-            <a href="/class_types/{{ class_type.id }}">{{ class_type.title }}</a>
+    <a href="/class_types/{{ class_type.id }}">
+        <section>
+            {{ class_type.title }}
             <hr>
-            <p>{{ class_type.intensity }}</p>
-            <p>{{ class_type.description }} </p>
-        </div>   
+            <div>
+                <p>Intensity level: {{ class_type.intensity }}</p>
+                <p>{{ class_type.description }} </p>
+            </div>
+        </section>
+    </a>      
     {% endfor %}
-</ul>
+</section>
+
+<a href="/class_types/new"><button>Add new class</button></a>
 
 {% endblock content %}

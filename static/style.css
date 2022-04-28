@@ -55,3 +55,48 @@ a {
 .dropdown-content a:hover {background-color: #376E6F;}
 .dropdown:hover .dropdown-content {display: block}
 .dropdown:hover .dropbtn {background-color: #2E151B;}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 20px;
+  }
+
+body > div > section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+body > div > section > a >section {
+    border: 2px solid #376E6F;
+    padding: 8px;
+    margin: 50px 25px 0px 25px;
+    /* height: 150px;
+    width: 150px; */
+}
+
+hr {
+    border: 0.5px solid #376E6F;
+  }
+
+  body > div > section > section > ul {
+      padding-left: 0px;
+  }
+
+.attendee_list {
+    display: inline;
+  }
+
+.attendee {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.attendee button {
+    margin-right: 150px;
+  }
