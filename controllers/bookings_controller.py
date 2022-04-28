@@ -9,6 +9,8 @@ bookings_blueprint = Blueprint("bookings", __name__)
 # CREATE
 @bookings_blueprint.route("/gym_classes/<id>/add_booking", methods=['POST'])
 def create_booking(id):
+    if request.form['add_booking'] == 'None':
+        return redirect(request.referrer)
     member_id = request.form['add_booking']
     member = member_repository.select(member_id)
     gym_class = gym_class_repository.select(id)
