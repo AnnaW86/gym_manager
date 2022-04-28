@@ -5,3 +5,6 @@ class GymClass:
         self.duration = duration
         self.location = location
         self.id = id
+    
+    def get_key_details(self):
+        return f"{self.start_time.time } { self.class_type.title }"

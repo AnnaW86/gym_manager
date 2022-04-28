@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect
 
 from models.member import Member
-from repositories import member_repository
+from repositories import member_repository, gym_class_repository
 
 members_blueprint = Blueprint("members", __name__)
 
@@ -28,7 +28,10 @@ def create_member():
 # SHOW
 @members_blueprint.route("/members/<id>")
 def show_member(id):
-    return render_template("members/show.html", member = member_repository.select(id))
+    member = member_repository.select(id)
+    enrolled_gym_classes = gym_class_repository.select_all_by_enrolled_member(id)
+    all_gym_classes = gym_class_repository.select_all()
+    return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, all_gym_classes = all_gym_classes)
 
 # EDIT
 @members_blueprint.route("/members/<id>/edit")

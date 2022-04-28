@@ -4,8 +4,14 @@
 
 
 <h1>Today's Classes</h1>
+
+{% for class_type in class_types %}
 <section>
+    <h1>{{ class_type.title }}</h1>
+    
     {% for gym_class in gym_classes %}
+    {% if  gym_class.class_type.id == class_type.id %}
+    
     <a href="/gym_classes/{{ gym_class.id }}">
         <section>
             {{ gym_class.class_type.title }}
@@ -17,8 +23,10 @@
             </div>  
         </section>
     </a>    
+    {% endif %}
     {% endfor %}
 </section>
 
+{% endfor %}
 
 {% endblock content %}

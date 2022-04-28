@@ -48,7 +48,7 @@ def select(id):
         member = Member(result['first_name'], result['last_name'], result['membership_number'], result['id'])
     return member
 
-def select_all_by_gym_class(gym_class):
+def select_all_by_gym_class(id):
     members = []
     sql = """
         SELECT members.*
@@ -58,7 +58,7 @@ def select_all_by_gym_class(gym_class):
         members.id
         WHERE bookings.gym_class_id = %s 
     """
-    values = [gym_class.id]
+    values = [id]
     results = run_sql(sql, values)
     for row in results:
         member = Member(row['first_name'], row['last_name'], row['membership_number'], row['id'])
