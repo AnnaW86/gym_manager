@@ -43,3 +43,22 @@ def select(id):
         location = location_repository.select(result['location_id'])
         gym_class = GymClass(class_type, start_time, result['duration'], location, result['id'])
     return gym_class
+
+def select_by_class_type_id(id):
+    filtered_classes = []
+    sql = """
+        SELECT gym_classes.*
+        FROM gym_classes
+        INNER JOIN class_types
+        ON class_types.id = gym_classes.class_type_id
+        WHERE class_types.id = %s
+    """
+    values = [id]
+    results = run_sql(sql, values)
+    for row in results:
+        class_type = class_type_repository.select(row['class_type_id'])
+        start_time = start_time_repository.select(row['start_time_id'])
+        location = location_repository.select(row['location_id'])
+        filtered_class = GymClass(class_type, start_time, row['duration'], location, row['id'])
+        filtered_classes.append(filtered_class)
+    return filtered_classes

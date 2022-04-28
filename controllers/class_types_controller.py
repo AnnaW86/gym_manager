@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect
 
 from models.class_type import ClassType
-from repositories import class_type_repository
+from repositories import class_type_repository, gym_class_repository
 
 class_types_blueprint = Blueprint("class_types", __name__)
 
@@ -28,7 +28,9 @@ def create_class_type():
 # SHOW
 @class_types_blueprint.route("/class_types/<id>")
 def show_class_type(id):
-    return render_template("class_types/show.html", class_type = class_type_repository.select(id))
+    class_type = class_type_repository.select(id)
+    filtered_classes = gym_class_repository.select_by_class_type_id(id)
+    return render_template("class_types/show.html", class_type = class_type, filtered_classes = filtered_classes)
 
 # EDIT
 @class_types_blueprint.route("/class_types/<id>/edit")

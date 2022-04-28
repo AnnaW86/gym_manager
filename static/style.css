@@ -100,3 +100,24 @@ hr {
 .attendee button {
     margin-right: 150px;
   }
+
+  .table {
+      display: flex;
+      align-items: flex-start;
+  }
+  
+  #cheeky_cell {
+      color: #2F4454;
+  }
+
+  table {
+      border-collapse: collapse;
+      width: 100px;
+  }
+
+  td {
+      border: 0.5px solid black;
+      text-align: center;
+      /* height: 10px;
+      width: 30px; */
+  }

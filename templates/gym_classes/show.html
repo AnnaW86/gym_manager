@@ -11,7 +11,8 @@
         <div class="attendee_list">
             <p>Attendees:</p>
             {% for attendee in attendees %}
-                <div class="attendee"> {{ attendee.get_full_name() }}
+                <div class="attendee">
+                    <p>{{ attendee.get_full_name() }}</p>
                         <form action="{{ attendee.id }}/delete_booking" method='POST'>
                         <button>Remove</button>
                         </form>

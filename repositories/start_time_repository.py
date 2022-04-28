@@ -1,3 +1,4 @@
+from psycopg2 import Time
 from db.run_sql import run_sql
 from models.start_time import StartTime
 
@@ -27,3 +28,12 @@ def select(id):
     if result is not None:
         time = StartTime(result['time'], result['id'])
     return time
+
+def select_all():
+    times = []
+    sql = "SELECT * FROM start_times"
+    results = run_sql(sql)
+    for row in results:
+        time = StartTime(row['time'], row['id'])
+        times.append(time)
+    return times
