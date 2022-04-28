@@ -13,9 +13,15 @@
         
     {% endfor %}
 </ul>
-<a href="/gym_class/{{ gym_class.id }}/edit">edit</a>
+<form action="{{ gym_class.id }}/add_booking" method="post">
+    <label for="add_booking"> Add member to this class:</label>
+        <select name="add_booking" id="add_booking">
+            {% for member in members %}
+                <option value="{{ member.id }}">{{ member.get_full_name() }}</option>            
+            {% endfor %}
+        </select>
+    <button type="submit">Add member</button>
+</form>
     
 {% endblock content %}
 
-
-<!-- <i class="material-icons"></i> -->

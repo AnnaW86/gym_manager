@@ -16,4 +16,5 @@ def classes():
 def show_gym_class(id):
     gym_class = gym_class_repository.select(id)
     attendees = member_repository.select_all_by_gym_class(gym_class)
-    return render_template("gym_classes/show.html", gym_class = gym_class, attendees = attendees )
+    members =  member_repository.select_all()
+    return render_template("gym_classes/show.html", gym_class = gym_class, attendees = attendees, members = members )
