@@ -9,7 +9,9 @@
 <p>Where: {{gym_class.location.name }}</p>
 <ul>Attendees:
     {% for attendee in attendees %}
-    <li>{{ attendee.get_full_name() }}</li>
+    <li>{{ attendee.get_full_name() }} <form action="{{ attendee.id }}/delete_booking" method='POST'>
+        <button>Remove</button>
+    </form> </li>
         
     {% endfor %}
 </ul>
