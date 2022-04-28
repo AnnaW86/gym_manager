@@ -1,14 +1,16 @@
 body {
-    font-family: 'Helvetica', arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    background-color: #2F4454;
+    background-color: #79031D;
+    background-image: linear-gradient(to bottom right, #79031D, rgb(199, 10, 10));
     margin: 0px;
-    color: lightgray
+    color: #F5F7F7;
+    height: 100vh;
 }
 
 body > header > nav > ul {
     display: flex;
-    background-color: #2E151B;
+    background-color: #000407;
     margin: 0px;
     padding: 5px 0px 5px 40px;
 }
@@ -21,16 +23,16 @@ li {
 
 a {
     text-decoration: none;
-    color: lightgray;
+    color: #F5F7F7;
 }
 
 .material-icons {
-    color: lightgray;
+    color: #EDB518;
 }
 
 .dropbtn {
-    background-color: #2E151B;
-    color: lightgray;
+    background-color: #000407;
+    color: #F5F7F7;
     font-size: 16px;
     border: none;
     margin: 0px;
@@ -39,22 +41,23 @@ a {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #2E151B;
+    background-color: #000407;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    border-radius: 5px;
 }
 
 .dropdown-content a {
-    color: lightgray;
+    color: #F5F7F7;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #376E6F;}
+.dropdown-content a:hover {background-color: #EDB518;}
 .dropdown:hover .dropdown-content {display: block}
-.dropdown:hover .dropbtn {background-color: #2E151B;}
+.dropdown:hover .dropbtn {background-color: #000407;}
 
 .container {
     display: flex;
@@ -73,15 +76,16 @@ body > div > section {
 }
 
 body > div > section > a >section {
-    border: 2px solid #376E6F;
+    border: 2px solid #EDB518;
     padding: 8px;
     margin: 50px 25px 0px 25px;
+    border-radius: 5px;
     /* height: 150px;
     width: 150px; */
 }
 
 hr {
-    border: 0.5px solid #376E6F;
+    border: 0.5px solid #EDB518;
   }
 
   body > div > section > section > ul {
@@ -101,23 +105,17 @@ hr {
     margin-right: 150px;
   }
 
-  .table {
-      display: flex;
-      align-items: flex-start;
-  }
-  
-  #cheeky_cell {
-      color: #2F4454;
+select, button, input {
+      border: none;
+      border-radius: 2px;
+      font-family: 'Open Sans', sans-serif;
+      color: #000407;
   }
 
-  table {
-      border-collapse: collapse;
-      width: 100px;
+button {
+    background-color: #EDB518;
   }
 
-  td {
-      border: 0.5px solid black;
-      text-align: center;
-      /* height: 10px;
-      width: 30px; */
-  }
+select, input {
+    background-color: #F5F7F7;
+}
