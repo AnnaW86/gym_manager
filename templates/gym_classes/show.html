@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Title: {{ gym_class.class_type.title }}</p>
+<p>Intensity: {{ gym_class.class_type.intensity }}</p>
+<p>Description: {{ gym_class.class_type.description }}</p>
+<p>When: {{ gym_class.start_time.time }}</p>
+<p>Where: {{gym_class.location.name }}</p>
+<ul>Attendees:
+    {% for attendee in attendees %}
+    <li>{{ attendee.get_full_name() }}</li>
+        
+    {% endfor %}
+</ul>
+<a href="/gym_class/{{ gym_class.id }}/edit">edit</a>
+    
+{% endblock content %}
+
+
+<!-- <i class="material-icons"></i> -->

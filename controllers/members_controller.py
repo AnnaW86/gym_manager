@@ -46,3 +46,5 @@ def update_member(id):
     member_repository.update(member)
     return render_template("members/show.html", member = member)
 
+# CLASS USERS' SHOW
+# @members_blueprint.route("/gym_classes/<id>")

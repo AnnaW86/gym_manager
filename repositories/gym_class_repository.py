@@ -29,4 +29,17 @@ def select_all():
         gym_classes.append(gym_class)
     return gym_classes
 
-
+def select(id):
+    gym_class = None
+    sql = """
+        SELECT * FROM gym_classes
+        WHERE id = %s
+    """
+    values = [id]
+    result = run_sql(sql, values)[0]
+    if result is not None:
+        class_type = class_type_repository.select(result['class_type_id'])
+        start_time = start_time_repository.select(result['start_time_id'])
+        location = location_repository.select(result['location_id'])
+        gym_class = GymClass(class_type, start_time, result['duration'], location, result['id'])
+    return gym_class

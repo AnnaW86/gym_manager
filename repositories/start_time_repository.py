@@ -1,4 +1,3 @@
-from psycopg2 import Time
 from db.run_sql import run_sql
 from models.start_time import StartTime
 

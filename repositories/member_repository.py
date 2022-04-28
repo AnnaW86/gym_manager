@@ -47,3 +47,20 @@ def select(id):
     if result is not None:
         member = Member(result['first_name'], result['last_name'], result['membership_number'], result['id'])
     return member
+
+def select_all_by_gym_class(gym_class):
+    members = []
+    sql = """
+        SELECT members.*
+        FROM members
+        INNER JOIN bookings
+        ON bookings.member_id =
+        members.id
+        WHERE bookings.gym_class_id = %s 
+    """
+    values = [gym_class.id]
+    results = run_sql(sql, values)
+    for row in results:
+        member = Member(row['first_name'], row['last_name'], row['membership_number'], row['id'])
+        members.append(member)
+    return members
