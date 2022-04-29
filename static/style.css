@@ -2,17 +2,25 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     background-color: #79031D;
-    background-image: linear-gradient(to bottom right, #79031D, rgb(199, 10, 10));
+    background-image: linear-gradient(to bottom right, #79031D, red);
+    background-repeat: no-repeat;
+    /* rgb(199, 10, 10) */
     margin: 0px;
     color: #F5F7F7;
-    height: 100vh;
+    min-height: 100vh;
+    height:auto
 }
+/* 
+body > header {
+    height: 35px;
+} */
 
 body > header > nav > ul {
     display: flex;
     background-color: #000407;
     margin: 0px;
     padding: 5px 0px 5px 40px;
+    height: 20px;
 }
 
 li {
@@ -36,6 +44,7 @@ a {
     font-size: 16px;
     border: none;
     margin: 0px;
+    height: 20px;
 }
 
 .dropdown-content {
@@ -50,9 +59,10 @@ a {
 
 .dropdown-content a {
     color: #F5F7F7;
-    padding: 12px 16px;
+    padding: 5px 16px;
     text-decoration: none;
     display: block;
+    height: 20px;
 }
 
 .dropdown-content a:hover {background-color: #EDB518;}
@@ -91,20 +101,26 @@ hr {
   body > div > section > section > ul {
       padding-left: 0px;
   }
-
+/* 
 .attendee_list {
     display: inline;
-  }
+  } */
 
 .attendee {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    align-items: center;
   }
 
 .attendee button {
-    margin-right: 150px;
+    width: 24px;
+    height: 24px;
   }
 
+.attendee p {
+    min-width: 197px;
+    margin: 0px;
+}
 select, button, input {
       border: none;
       border-radius: 2px;
@@ -118,4 +134,10 @@ button {
 
 select, input {
     background-color: #F5F7F7;
+}
+
+.delete_button {
+    padding: 0px;
+    background-color: transparent;
+    color:#EDB518
 }

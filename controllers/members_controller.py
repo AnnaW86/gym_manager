@@ -1,3 +1,4 @@
+from zoneinfo import available_timezones
 from flask import Blueprint, render_template, request, redirect
 
 from models.member import Member
@@ -31,7 +32,11 @@ def show_member(id):
     member = member_repository.select(id)
     enrolled_gym_classes = gym_class_repository.select_all_by_enrolled_member(id)
     all_gym_classes = gym_class_repository.select_all()
-    return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, all_gym_classes = all_gym_classes)
+    available_classes = []
+    for gym_class in all_gym_classes:
+        if gym_class.check_availability() > 0:
+            available_classes.append(gym_class)        
+    return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, available_classes = available_classes)
 
 # EDIT
 @members_blueprint.route("/members/<id>/edit")

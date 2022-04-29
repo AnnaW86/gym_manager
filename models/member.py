@@ -7,3 +7,10 @@ class Member:
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
+    
+    def check_members_existing_booking(self, gym_class, bookings):
+        booked = False
+        for booking in bookings:
+            if booking.member_id == self.id and booking.gym_class_id == gym_class.id:
+                booked = True
+        return booked

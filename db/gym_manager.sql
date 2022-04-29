@@ -35,7 +35,8 @@ CREATE TABLE gym_classes (
     class_type_id INT REFERENCES class_types(id),
     start_time_id VARCHAR,
     duration INT,
-    location_id INT REFERENCES locations(id)
+    location_id INT REFERENCES locations(id),
+    capacity INT
 );
 
 CREATE TABLE bookings (

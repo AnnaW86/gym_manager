@@ -4,11 +4,11 @@ from repositories import class_type_repository, start_time_repository, location_
 
 def save(gym_class):
     sql = """
-        INSERT INTO gym_classes (class_type_id, start_time_id, duration, location_id)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO gym_classes (class_type_id, start_time_id, duration, location_id, capacity)
+        VALUES (%s, %s, %s, %s, %s)
         RETURNING *    
     """
-    values = [gym_class.class_type.id, gym_class.start_time.id, gym_class.duration, gym_class.location.id]
+    values = [gym_class.class_type.id, gym_class.start_time.id, gym_class.duration, gym_class.location.id, gym_class.capacity]
     results = run_sql(sql, values)
     gym_class.id = results[0]['id']
     return gym_class
@@ -25,7 +25,7 @@ def select_all():
         class_type = class_type_repository.select(row['class_type_id'])
         start_time = start_time_repository.select(row['start_time_id'])
         location = location_repository.select(row['location_id'])
-        gym_class = GymClass(class_type, start_time, row['duration'],location, row['id'])
+        gym_class = GymClass(class_type, start_time, row['duration'],location, row['capacity'], row['id'])
         gym_classes.append(gym_class)
     return gym_classes
 
@@ -41,7 +41,7 @@ def select(id):
         class_type = class_type_repository.select(result['class_type_id'])
         start_time = start_time_repository.select(result['start_time_id'])
         location = location_repository.select(result['location_id'])
-        gym_class = GymClass(class_type, start_time, result['duration'], location, result['id'])
+        gym_class = GymClass(class_type, start_time, result['duration'], location, result['capacity'], result['id'])
     return gym_class
 
 def select_by_class_type_id(id):
@@ -59,7 +59,7 @@ def select_by_class_type_id(id):
         class_type = class_type_repository.select(row['class_type_id'])
         start_time = start_time_repository.select(row['start_time_id'])
         location = location_repository.select(row['location_id'])
-        filtered_class = GymClass(class_type, start_time, row['duration'], location, row['id'])
+        filtered_class = GymClass(class_type, start_time, row['duration'], location, row['capacity'], row['id'])
         filtered_classes.append(filtered_class)
     return filtered_classes
 
@@ -79,6 +79,15 @@ def select_all_by_enrolled_member(id):
         class_type = class_type_repository.select(row['class_type_id'])
         start_time = start_time_repository.select(row['start_time_id'])
         location = location_repository.select(row['location_id'])
-        gym_class = GymClass(class_type, start_time, row['duration'], location, row['id'])
+        gym_class = GymClass(class_type, start_time, row['duration'], location, row['capacity'], row['id'])
         gym_classes.append(gym_class)
     return gym_classes
+
+def check_class_size(id):
+    sql = """
+        SELECT COUNT(*) FROM bookings
+        WHERE gym_class_id = %s
+    """
+    values=[id]
+    class_size = run_sql(sql, values)[0]['count']
+    return class_size

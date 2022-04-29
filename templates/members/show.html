@@ -17,7 +17,7 @@
     <label for="add_booking"> Add booking:</label>
         <select name="add_booking" id="add_booking">
             <option value="None">--</option>
-            {% for gym_class in all_gym_classes %}
+            {% for gym_class in available_classes %}
                 <option value="{{ gym_class.id }}">{{ gym_class.get_key_details() }}</option>            
             {% endfor %}
         </select>
