@@ -19,7 +19,10 @@ def delete_all():
 
 def select_all():
     members = []
-    sql = "SELECT * FROM members"
+    sql = """
+        SELECT * FROM members
+        ORDER BY last_name
+    """
     results = run_sql(sql)
     for row in results:
         member = Member(row['first_name'], row['last_name'], row['membership_number'], row['id'])

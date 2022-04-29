@@ -21,10 +21,13 @@ def show_gym_class(id):
     attendees = member_repository.select_all_by_gym_class(id)
     availability = gym_class.check_availability()
     members =  member_repository.select_all()
-    bookings = booking_repository.select_all()
     unbooked_members = []
+    enrolled_members = member_repository.select_all_by_gym_class(id)
     for member in members:
-        if gym_class.check_gym_class_existing_booking(member, bookings) == False:
+        booked = False
+        for enrolled_member in enrolled_members:
+            if member.id == enrolled_member.id:
+                booked = True
+        if booked == False:
             unbooked_members.append(member)
-    breakpoint()
     return render_template("gym_classes/show.html", gym_class = gym_class, attendees = attendees, availability = availability, unbooked_members = unbooked_members )

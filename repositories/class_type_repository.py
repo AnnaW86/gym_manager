@@ -19,7 +19,10 @@ def delete_all():
 
 def select_all():
     class_types = []
-    sql = "SELECT * FROM class_types"
+    sql = """
+        SELECT * FROM class_types
+        ORDER BY title
+    """
     results = run_sql(sql)
     for row in results:
         class_type = ClassType(row['title'], row['intensity'], row['description'], row['id'])
