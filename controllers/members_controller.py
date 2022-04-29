@@ -35,8 +35,10 @@ def show_member(id):
     available_classes = []
     for gym_class in all_gym_classes:
         if gym_class.check_availability() > 0:
-            available_classes.append(gym_class)        
-    return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, available_classes = available_classes)
+            available_classes.append(gym_class)
+    bookable_classes = []
+    member.check_existing_booking(enrolled_gym_classes, available_classes, bookable_classes)
+    return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, bookable_classes = bookable_classes)
 
 # EDIT
 @members_blueprint.route("/members/<id>/edit")

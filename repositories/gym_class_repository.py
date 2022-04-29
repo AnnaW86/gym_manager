@@ -19,7 +19,10 @@ def delete_all():
 
 def select_all():
     gym_classes = []
-    sql = "SELECT * FROM gym_classes"
+    sql = """
+        SELECT * FROM gym_classes
+        ORDER BY class_type_id
+    """
     results = run_sql(sql)
     for row in results:
         class_type = class_type_repository.select(row['class_type_id'])

@@ -23,11 +23,5 @@ def show_gym_class(id):
     members =  member_repository.select_all()
     unbooked_members = []
     enrolled_members = member_repository.select_all_by_gym_class(id)
-    for member in members:
-        booked = False
-        for enrolled_member in enrolled_members:
-            if member.id == enrolled_member.id:
-                booked = True
-        if booked == False:
-            unbooked_members.append(member)
+    gym_class.check_members_existing_booking(members, enrolled_members, unbooked_members)
     return render_template("gym_classes/show.html", gym_class = gym_class, attendees = attendees, availability = availability, unbooked_members = unbooked_members )

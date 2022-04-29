@@ -15,12 +15,13 @@ class GymClass:
     def check_availability(self):
         availability = self.capacity - gym_class_repository.check_class_size(self.id)
         return availability
-
-    def check_gym_class_existing_booking(self, member, bookings):
-        booked = False
-        for booking in bookings:
-            if booking.member.id == self.id and booking.gym_class.id == member.id:
-                booked = True
-                return booked
-        return booked
-        
+    
+    def check_members_existing_booking(self, members, enrolled_members, unbooked_members):
+        for member in members:
+            booked = False
+            for enrolled_member in enrolled_members:
+                if member.id == enrolled_member.id:
+                    booked = True
+            if booked == False:
+                unbooked_members.append(member)
+        return unbooked_members
