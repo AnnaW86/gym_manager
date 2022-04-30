@@ -7,11 +7,25 @@
 <p>Description: {{ class_type.description }}</p>
 <a href="/class_types/{{ class_type.id }}/edit">edit</a>
 
-{% for class in filtered_classes %}
-
-    <a href="/gym_classes/{{ class.id }}"><p> {{ class.start_time.time}} in {{ class.location.name}} </p></a>
+<section>
+   
+    {% for gym_class in filtered_classes %}
+    {% if  gym_class.class_type.id == class_type.id %}
     
-{% endfor %}
+    <section class="object_container">
+            <a href="/gym_classes/{{ gym_class.id }}">
+            {{ gym_class.class_type.title }}
+            <hr>
+            <div>
+                <p>{{ gym_class.start_time.time }}</p>
+                <p>{{ gym_class.duration }} mins</p>
+                <p>In the {{ gym_class.location.name }}</p>
+            </div>  
+        </a>    
+        </section>
+    {% endif %}
+    {% endfor %}
+</section>
     
 {% endblock content %}
 

@@ -75,6 +75,7 @@ def select_all_by_enrolled_member(id):
         ON bookings.gym_class_id =
         gym_classes.id
         WHERE bookings.member_id = %s 
+        ORDER BY start_time_id
     """
     values = [id]
     results = run_sql(sql, values)
@@ -94,3 +95,15 @@ def check_class_size(id):
     values=[id]
     class_size = run_sql(sql, values)[0]['count']
     return class_size
+
+def find_class_times(id):
+    booked_start_times_ids = []
+    sql = """
+        SELECT start_times_id FROM gym_classes
+        WHERE id = %s
+    """
+    values = [id]
+    results = run_sql(sql, values)
+    for row in results:
+        booked_start_times_ids.append(row['start_time_id'])
+    return booked_start_times_ids

@@ -16,31 +16,39 @@
     <header>
         <nav>
             <ul class="menu">
-                <li>
-                    <button class="dropbtn">
-                        <a href="/"><span class="material-icons">home</span></a>
-                    </button>
+                <li><a href="/"><span class="material-icons">home</span></a></li>
+                <li class="menu_headings">Classes
+                    <ul>
+                        <li><a href="/class_types">Classes we offer</a></li>
+                        <li><a href="/class_types/new">Add a new class</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn"> Classes</button>
-                        <div class="dropdown-content">
-                            <a href="/class_types">View class types</a>
-                            <a href="/gym_classes">View all bookable classes</a>
-                            <a href="/class_types/new">Add new classes</a>
-                        </div>
-                    </div>
+                <li class="menu_headings">Sessions
+                    <ul>
+                        <li class="session_headings">See today's sessions
+                            <ul>
+                                {% for class_type in class_types %}
+                                <li><a href="/class_types/{{ class_type.id }}">{{ class_type.title }} </a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="session_headings">Add a new session
+                            <ul>
+                                {% for class_type in class_types %}
+                                <li><a href="/gym_classes/new">{{ class_type.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn"> Members</button>
-                        <div class="dropdown-content">
-                            <a href="/members">View all members</a>
-                            <a href="/members/new">Add new members</a>
-                        </div>
-                    </div>
+                <li class="menu_headings">Members
+                    <ul>
+                        <li><a href="/members">See all members</a></li>
+                        <li><a href="/members/new">Add a new member</a></li>
+                    </ul>
                 </li>
             </ul>
+            
         </nav>
     </header>
     <div class="container">

@@ -27,3 +27,14 @@ def select(id):
     if result is not None:
         location = Location(result['name'], result['id'])
     return location
+
+def select_all():
+    locations = []
+    sql = """SELECT * FROM locations
+        ORDER BY name
+    """
+    results = run_sql(sql)
+    for row in results:
+        location = Location(row['name'], row['id'])
+        locations.append(location)
+    return locations

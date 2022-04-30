@@ -13,7 +13,7 @@ def class_types():
 # NEW
 @class_types_blueprint.route("/class_types/new")
 def new_class_type():
-    return render_template("class_types/new.html")
+    return render_template("class_types/new.html", class_types = class_type_repository.select_all())
 
 # CREATE
 @class_types_blueprint.route("/class_types", methods=['POST'])
@@ -30,12 +30,14 @@ def create_class_type():
 def show_class_type(id):
     class_type = class_type_repository.select(id)
     filtered_classes = gym_class_repository.select_by_class_type_id(id)
-    return render_template("class_types/show.html", class_type = class_type, filtered_classes = filtered_classes)
+    
+    return render_template("class_types/show.html", class_type = class_type, filtered_classes = filtered_classes, class_types = class_type_repository.select_all())
 
 # EDIT
 @class_types_blueprint.route("/class_types/<id>/edit")
 def edit_class_type(id):
-    return render_template("class_types/edit.html", class_type = class_type_repository.select(id))
+    class_type = class_type_repository.select(id)
+    return render_template("class_types/edit.html", class_type = class_type, class_types = class_type_repository.select_all())
 
 # UPDATE
 @class_types_blueprint.route("/class_types/<id>", methods=['POST'])

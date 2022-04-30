@@ -2,12 +2,17 @@
 
 {% block content %}
 
-<h1>Members</h1>
-
-<ul>
-    {% for member in members %}
+<div class="list">
+    <div>
+        <h1>Members:</h1>
+        <p>(Select a name for more details)</p>
+        
+    </div>
+    <ul id = "member_list">
+        {% for member in members %}
         <a href="/members/{{ member.id }}"><li>{{ member.get_full_name() }}</li></a>
-    {% endfor %}
-</ul>
-
+        {% endfor %}
+    </ul>
+    
+</div>
 {% endblock content %}

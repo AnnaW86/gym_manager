@@ -6,16 +6,16 @@
 
 <section>
     {% for class_type in class_types %}
-    <a href="/class_types/{{ class_type.id }}">
-        <section>
+    <section class="object_container">
+            <a href="/class_types/{{ class_type.id }}">
             {{ class_type.title }}
-            <hr>
-            <div>
-                <p>Intensity level: {{ class_type.intensity }}</p>
-                <p>{{ class_type.description }} </p>
-            </div>
+                <hr>
+                <div>
+                    <p>Intensity level: {{ class_type.intensity }}</p>
+                    <p>{{ class_type.description }} </p>
+                </div>
+        </a>      
         </section>
-    </a>      
     {% endfor %}
 </section>
 

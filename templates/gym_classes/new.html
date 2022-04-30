@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div>
+
+    <form action="/gym_classes" method="post">
+        <div>
+            <label for="class_type">Class type:</label>
+            <select name="class_type" id="class_type">
+                <!-- <option value="None">--</option> -->
+                {% for class_type in class_types %}
+                    <option value="{{ class_type.id }}">{{ class_type.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="start_time">Start time:</label>
+            <select name="start_time" id="start_time">
+                <!-- <option value="None">--</option> -->
+                {% for start_time in start_times %}
+                    <option value="{{ start_time.id }}">{{ start_time.time }}</option>                    
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="duration">Duration:</label>
+            <input type="number" id="duration" name="duration" required />
+        </div>
+        <div>
+            <label for="location">Location:</label>
+            <select name="location" id="location">
+                <!-- <option value="None">--</option> -->
+                {% for location in locations %}
+                    <option value="{{ location.id }}">{{ location.name}}</option>                    
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" name="capacity" required />
+        </div>
+        <div>
+            <button type="submit">Add Member</button>
+        </div>
+    
+    </form>
+
+
+</div>
+
+
+
+{% endblock content %}

@@ -5,6 +5,8 @@ from controllers.class_types_controller import class_types_blueprint
 from controllers.gym_classes_controller import gym_classes_blueprint
 from controllers.bookings_controller import bookings_blueprint
 
+from repositories import class_type_repository
+
 app = Flask(__name__)
 
 app.register_blueprint(members_blueprint)
@@ -14,7 +16,7 @@ app.register_blueprint(bookings_blueprint)
 
 @app.route("/")
 def main():
-    return render_template('index.html')
+    return render_template('index.html', class_types = class_type_repository.select_all())
 
 if __name__ == '__main__':
     app.run()
