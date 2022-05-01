@@ -11,7 +11,7 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     height: auto;
-    padding-bottom: 3em;
+    padding-right: 0px;
 }
 
 body > header > nav > ul {
@@ -110,8 +110,7 @@ body > div {
     justify-content: center;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 3em;
-    padding-left: 3em;
+    padding: 3em;
 }
 
 .homepage {
@@ -213,7 +212,8 @@ body > div > div > section > section {
 }
 
 .section_info > div {
-    margin-right: 20em;
+    min-width: 250px;
+    margin-right: 150px;
 }
 
 .section_info > div > div {

@@ -4,17 +4,9 @@
 
 
 <!-- <div> -->
-
-    <form action="/gym_classes" method="post">
-        <div>
-            <label for="class_type">Class type:</label>
-            <select name="class_type" id="class_type">
-                <!-- <option value="None">--</option> -->
-                {% for class_type in class_types %}
-                    <option value="{{ class_type.id }}">{{ class_type.title }}</option>
-                {% endfor %}
-            </select>
-        </div>
+<h1>Add a new {{ class_type.title }} session</h1>
+    <form action="/gym_classes/{{ class_type.id }}" method="post">
+        
         <div>
             <label for="start_time">Start time:</label>
             <select name="start_time" id="start_time">

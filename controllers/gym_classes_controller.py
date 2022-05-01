@@ -1,4 +1,3 @@
-from zoneinfo import available_timezones
 from flask import Blueprint, render_template, redirect, request
 
 from models.gym_class import GymClass
@@ -14,19 +13,18 @@ def classes():
     return render_template("gym_classes/index.html", class_types = class_types, gym_classes = gym_classes)
 
 # NEW
-@gym_classes_blueprint.route("/gym_classes/new")
-def new_class():
+@gym_classes_blueprint.route("/class_types/<id>/new_session")
+def new_class(id):
+    class_type = class_type_repository.select(id)
     class_types = class_type_repository.select_all()
-    # available_start_times = 
     start_times = start_time_repository.select_all()
     locations = location_repository.select_all()
-    return render_template("gym_classes/new.html", class_types = class_types, start_times = start_times, locations = locations)
+    return render_template("gym_classes/new.html", class_type = class_type, class_types = class_types, start_times = start_times, locations = locations)
 
 # CREATE
-@gym_classes_blueprint.route("/gym_classes", methods = ['POST'])
-def create_class():
-    class_type_id = request.form['class_type']
-    class_type = class_type_repository.select(class_type_id)
+@gym_classes_blueprint.route("/gym_classes/<id>", methods = ['POST'])
+def create_class(id):
+    class_type = class_type_repository.select(id)
     start_time_id = request.form['start_time']
     start_time = start_time_repository.select(start_time_id)
     duration = request.form['duration']
@@ -35,7 +33,7 @@ def create_class():
     capacity = request.form['capacity']
     gym_class = GymClass(class_type, start_time, duration, location, capacity)
     gym_class_repository.save(gym_class)
-    return redirect("/gym_classes")
+    return redirect(f"/class_types/{id}")
 
 
 # SHOW

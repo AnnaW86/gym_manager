@@ -36,7 +36,7 @@
                         <li class="session_headings">Add a new session
                             <ul>
                                 {% for class_type in class_types %}
-                                <li><a href="/gym_classes/new">{{ class_type.title }}</a></li>
+                                <li><a href="/class_types/{{class_type.id }}/new_session">{{ class_type.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
