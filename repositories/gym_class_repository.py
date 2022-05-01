@@ -55,6 +55,7 @@ def select_by_class_type_id(id):
         INNER JOIN class_types
         ON class_types.id = gym_classes.class_type_id
         WHERE class_types.id = %s
+        ORDER BY gym_classes.start_time_id
     """
     values = [id]
     results = run_sql(sql, values)
@@ -108,11 +109,11 @@ def find_class_times(id):
         booked_start_times_ids.append(row['start_time_id'])
     return booked_start_times_ids
 
-# def find_number_of_classes_scheduled(id):
-#     sql = """
-#         SELECT COUNT(*) FROM gym_classes
-#         WHERE gym_class.id = %s
-#     """
-#     values = [id]
-#     number_of_classes = run_sql(sql, values)[0]
-#     return number_of_classes
+def find_number_of_classes_scheduled(id):
+    sql = """
+        SELECT COUNT(*) FROM gym_classes
+        WHERE class_type_id = %s
+    """
+    values = [id]
+    number_of_classes = run_sql(sql, values)[0]['count']
+    return number_of_classes

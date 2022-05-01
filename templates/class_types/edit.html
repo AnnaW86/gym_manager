@@ -8,11 +8,12 @@
     </div>
     <div>
         <label for="Intensity">Intensity:</label>
-        <input type="number" name="intensity" id="intensity" value="{{ class_type.intensity }}" required>
+        <input type="number" name="intensity" id="intensity" min="1" max="5" value="{{ class_type.intensity }}" required>
     </div>
     <div>
         <label for="description">Description:</label>
-        <input type="text" name="description" id="description" value="{{ class_type.description }}" required>
+        <textarea name="description" id="description" cols="30" rows="3" required>{{ class_type.description }}</textarea>
+
     </div>
     <div class="form_button">
         <button type="submit">Update {{ class_type.title }}</button>

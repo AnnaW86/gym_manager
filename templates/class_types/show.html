@@ -21,12 +21,15 @@
             <p>Description: {{ class_type.description }}</p>
         </div>
         
-        <img src="/static/img/{{class_type.title }}.jpg" alt="{{ class_type.title }} image">
+        <img src="/static/img/{{class_type.title }}.jpg" onerror="this.onerror=null; this.src='/static/img/default.jpg'" alt="{{ class_type.title }} image">
         
     </div>
     
     <section>
-        
+        {% if number_of_scheduled_classes == 0 %}
+        <p>There are no {{class_type.title }} sessions scheduled.</p>
+            
+        {% endif %}
             {% for gym_class in filtered_classes %}
                 {% if  gym_class.class_type.id == class_type.id %}
                 
