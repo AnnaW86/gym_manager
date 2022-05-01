@@ -4,13 +4,21 @@ DROP TABLE IF EXISTS gym_classes;
 DROP TABLE IF EXISTS class_types;
 DROP TABLE IF EXISTS start_times;
 DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS membership_types;
 
+
+CREATE TABLE membership_types (
+    id SERIAL PRIMARY KEY,
+    membership_type VARCHAR(255)
+);
 
 CREATE TABLE members (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
-    membership_number INT
+    membership_number INT,
+    membership_type_id INT references membership_types(id),
+    active_status BOOLEAN
 );
 
 CREATE TABLE class_types (

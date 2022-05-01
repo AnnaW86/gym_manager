@@ -1,14 +1,13 @@
-from cProfile import run
 from db.run_sql import run_sql
 from models.member import Member
 
 def save(member):
     sql = """
-        INSERT INTO members (first_name, last_name, membership_number)
-        VALUES (%s, %s, %s)
+        INSERT INTO members (first_name, last_name, membership_number, membership_type_id, active_status)
+        VALUES (%s, %s, %s, %s, %s)
         RETURNING *
     """
-    values = [member.first_name, member.last_name, member.membership_number]
+    values = [member.first_name, member.last_name, member.membership_number, member.membership_type.id, member.active_status]
     results = run_sql(sql, values)
     member.id = results[0]['id']
     return member
@@ -25,7 +24,7 @@ def select_all():
     """
     results = run_sql(sql)
     for row in results:
-        member = Member(row['first_name'], row['last_name'], row['membership_number'], row['id'])
+        member = Member(row['first_name'], row['last_name'], row['membership_number'], row['membership_type'], row['active_status'], row['id'])
         members.append(member)
     return members
 

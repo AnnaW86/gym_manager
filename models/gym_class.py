@@ -1,4 +1,4 @@
-from repositories import gym_class_repository, start_time_repository
+# from repositories import gym_class_repository, start_time_repository
 
 class GymClass:
     def __init__(self, class_type, start_time, duration, location, capacity, id=None):
