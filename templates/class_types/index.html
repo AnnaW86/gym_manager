@@ -2,23 +2,33 @@
 
 {% block content %}
 
-<h1>Available Classes</h1>
+<div>
 
-<section>
-    {% for class_type in class_types %}
-    <section class="object_container">
+    <h1>Available Classes</h1>
+    
+    <section>
+        {% for class_type in class_types %}
+        <section class="object_container">
             <a href="/class_types/{{ class_type.id }}">
-            {{ class_type.title }}
+                {{ class_type.title }}
                 <hr>
                 <div>
-                    <p>Intensity level: {{ class_type.intensity }}</p>
+                    <p>Intensity level: 
+                        {% for i in range(class_type.intensity) %}
+                        <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for i in range(5 - class_type.intensity)  %}
+                        <span class="fa fa-star" id="unchecked"></span>  
+                        {% endfor %}
+                    </p>
                     <p>{{ class_type.description }} </p>
                 </div>
-        </a>      
+            </a>      
         </section>
-    {% endfor %}
-</section>
-
-<a href="/class_types/new"><button>Add new class</button></a>
+        {% endfor %}
+    </section>
+    
+</div>
+<a href="/class_types/new"><button>+ Add new class</button></a>
 
 {% endblock content %}

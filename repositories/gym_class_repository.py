@@ -107,3 +107,12 @@ def find_class_times(id):
     for row in results:
         booked_start_times_ids.append(row['start_time_id'])
     return booked_start_times_ids
+
+# def find_number_of_classes_scheduled(id):
+#     sql = """
+#         SELECT COUNT(*) FROM gym_classes
+#         WHERE gym_class.id = %s
+#     """
+#     values = [id]
+#     number_of_classes = run_sql(sql, values)[0]
+#     return number_of_classes

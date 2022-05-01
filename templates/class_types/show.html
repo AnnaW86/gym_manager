@@ -2,32 +2,54 @@
 
 {% block content %}
 
-<p>Title: {{ class_type.title }}</p>
-<p>Intensity: {{ class_type.intensity }}</p>
-<p>Description: {{ class_type.description }}</p>
-<a href="/class_types/{{ class_type.id }}/edit">edit</a>
+<div>
+    <div class="section_info">
 
-<section>
-   
-    {% for gym_class in filtered_classes %}
-    {% if  gym_class.class_type.id == class_type.id %}
-    
-    <section class="object_container">
-            <a href="/gym_classes/{{ gym_class.id }}">
-            {{ gym_class.class_type.title }}
-            <hr>
+        <div>
             <div>
-                <p>{{ gym_class.start_time.time }}</p>
-                <p>{{ gym_class.duration }} mins</p>
-                <p>In the {{ gym_class.location.name }}</p>
-            </div>  
-        </a>    
-        </section>
-    {% endif %}
-    {% endfor %}
-</section>
+                <h1>{{ class_type.title }}</h1>
+                <a href="/class_types/{{ class_type.id }}/edit"><i class="material-icons">edit</i></a>
+
+            </div>
+            <p>Intensity: 
+                {% for i in range(class_type.intensity) %}
+                <span class="fa fa-star checked"></span>
+                {% endfor %}
+                {% for i in range(5 - class_type.intensity)  %}
+                <span class="fa fa-star" id="unchecked"></span>  
+                {% endfor %}</p>
+            <p>Description: {{ class_type.description }}</p>
+        </div>
+        
+        <img src="/static/img/{{class_type.title }}.jpg" alt="{{ class_type.title }} image">
+        
+    </div>
     
+    <section>
+        
+            {% for gym_class in filtered_classes %}
+                {% if  gym_class.class_type.id == class_type.id %}
+                
+                <section class="object_container">
+                    <a href="/gym_classes/{{ gym_class.id }}">
+                        {{ gym_class.class_type.title }}
+                        <hr>
+                        <div>
+                            <p>{{ gym_class.start_time.time }}</p>
+                            <p>{{ gym_class.duration }} mins</p>
+                            <p>In the {{ gym_class.location.name.lower() }}</p>
+                        </div>  
+                    </a>    
+                </section>
+                {% endif %}
+            {% endfor %}
+
+    </section>
+    <a href="/gym_classes/new"><button>+ Add new session</button></a>
+    
+</div>
+
+
+
+
 {% endblock content %}
-
-
-<!-- <i class="material-icons"></i> -->

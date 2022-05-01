@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="page_container">
+<section>
 
     <section>
         
@@ -25,7 +25,7 @@
         </div>
         
         <form action="{{ member.id }}/add_booking" method="post">
-            <label for="add_booking"> Add booking:</label>
+            <label for="add_booking"></label>
             <div>
                 <select name="add_booking" id="add_booking">
                     <option value="None">--</option>
@@ -33,16 +33,16 @@
                     <option value="{{ gym_class.id }}">{{ gym_class.get_key_details() }}</option>            
                     {% endfor %}
                 </select>
-                <button type="submit">Add class</button>
+                <button type="submit">+ Add a booking</button>
             </div>
         </form>
         
     </section>
     <aside class="profile_avatar">
-        <img src="/static/placeholder_avatar.png" alt="placeholder profile picture">
+        <img src="/static/img/placeholder_avatar.png" alt="placeholder profile picture">
     </aside>
-</div>
-    
+</section>
+
 
     {% endblock content %}
     
