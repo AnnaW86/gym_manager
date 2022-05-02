@@ -58,3 +58,15 @@ def select_ids():
         id = row['id']
         ids.append(id)
     return ids    
+
+def select_all_booked_times(id):
+    times = []
+    sql = """
+        SELECT start_time FROM gym_classes
+        WHERE class_type_id = %s
+    """
+    values = [id]
+    results = run_sql(sql, values)
+    for row in results:
+        times.append(row['start_time'])
+    return times

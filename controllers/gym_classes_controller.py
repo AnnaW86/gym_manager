@@ -1,9 +1,9 @@
-import imp
 from flask import Blueprint, render_template, redirect, request
 
 from models.gym_class import GymClass
 from models.class_type import ClassType
-from repositories import gym_class_repository, member_repository, start_time_repository, class_type_repository, location_repository
+from repositories import gym_class_repository, member_repository, class_type_repository, location_repository
+from helpers import date_time_helper
 
 gym_classes_blueprint = Blueprint("gym_classes", __name__)
 
@@ -27,8 +27,7 @@ def new_class(id):
 @gym_classes_blueprint.route("/gym_classes/<id>", methods = ['POST'])
 def create_class(id):
     class_type = class_type_repository.select(id)
-    start_time_id = request.form['start_time']
-    start_time = start_time_repository.select(start_time_id)
+    start_time = request.form['start_time']
     duration = request.form['duration']
     location_id = request.form['location']
     location = location_repository.select(location_id)

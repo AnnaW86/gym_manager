@@ -4,7 +4,14 @@
 <section>
     <section>
         <p>Title: {{ gym_class.class_type.title }}</p>
-        <p>Intensity: {{ gym_class.class_type.intensity }}</p>
+        <a href="/gym_classes/{{ gym_class.id }}/edit"><i class="material-icons">edit</i></a>
+        <p>Intensity:
+            {% for i in range(gym_class.class_type.intensity) %}
+            <span class="fa fa-star checked"></span>
+            {% endfor %}
+            {% for i in range(5 - gym_class.class_type.intensity)  %}
+            <span class="fa fa-star" id="unchecked"></span>  
+            {% endfor %}</p>
         <p>Description: {{ gym_class.class_type.description }}</p>
         <p>When: {{ gym_class.start_time.time }}</p>
         <p>Where: {{gym_class.location.name }}</p>

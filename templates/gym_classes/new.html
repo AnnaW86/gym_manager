@@ -12,7 +12,7 @@
             <select name="start_time" id="start_time">
                 <!-- <option value="None">--</option> -->
                 {% for start_time in start_times %}
-                    <option value="{{ start_time.id }}">{{ start_time.time }}</option>                    
+                    <option value="{{ start_time }}">{{ start_time }}</option>                    
                 {% endfor %}
             </select>
         </div>

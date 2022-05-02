@@ -38,3 +38,4 @@ def select_all():
         location = Location(row['name'], row['id'])
         locations.append(location)
     return locations
+

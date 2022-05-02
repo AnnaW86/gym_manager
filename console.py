@@ -1,19 +1,17 @@
 from models.member import Member
 from models.class_type import ClassType
 from models.location import Location
-from models.start_time import StartTime
 from models.gym_class import GymClass
 from models.booking import Booking
 from models.membership_type import MembershipType
 
-from repositories import member_repository, class_type_repository, location_repository, start_time_repository, gym_class_repository, booking_repository, membership_type_repository
+from repositories import member_repository, class_type_repository, location_repository, gym_class_repository, booking_repository, membership_type_repository
 
 booking_repository.delete_all()
 gym_class_repository.delete_all()
 member_repository.delete_all()
 class_type_repository.delete_all()
 location_repository.delete_all()
-start_time_repository.delete_all()
 membership_type_repository.delete_all()
 
 membership_type1 = MembershipType("premium")
@@ -60,45 +58,23 @@ location_repository.save(location2)
 location3 = Location('Pool')
 location_repository.save(location3)
 
-am6 = StartTime('6am')
-am7 = StartTime('7am')
-am8 = StartTime('8am')
-am9 = StartTime('9am')
-am10 = StartTime('10am')
-am11 = StartTime('11am')
-pm12 = StartTime('12pm')
-pm1 = StartTime('1pm')
-pm2 = StartTime('2pm')
-pm3 = StartTime('3pm')
-pm4 = StartTime('4pm')
-pm5 = StartTime('5pm')
-pm6 = StartTime('6pm')
-pm7 = StartTime('7pm')
-pm8 = StartTime('8pm')
-pm9 = StartTime('9pm')
-pm10 = StartTime('10pm')
-
-start_times = [am6,am7,am8,am9,am10,am11,pm12,pm1,pm2,pm3,pm4,pm5,pm6,pm7,pm8,pm9,pm10]
-
-for time in start_times:
-    start_time_repository.save(time)
 
 
-class1 = GymClass(spin, am6, 30, location1, 8)
-class2 = GymClass(spin, am7, 30, location1, 8)
-class3 = GymClass(spin, am11, 45, location1, 8)
-class4 = GymClass(spin, pm2, 45, location1, 8)
-class5 = GymClass(spin, pm5, 45, location1, 8)
-class6 = GymClass(spin, pm6, 30, location1, 8)
-class7 = GymClass(pilates, am8, 25, location2, 15)
-class8 = GymClass(pilates, am9, 25, location2, 15)
-class9 = GymClass(pilates, am10, 40, location2, 15)
-class10 = GymClass(pilates, pm12, 40, location2, 15)
-class11 = GymClass(pilates, pm3, 30, location2, 15)
-class12 = GymClass(hiit, am11, 30, location2, 10)
-class13 = GymClass(hiit, pm5, 30, location2, 10)
-class14 = GymClass(hiit, pm8, 45, location2, 10)
-class15 = GymClass(aquafit, pm1, 30, location3, 10)
+class1 = GymClass(spin, '6am', 30, location1, 8)
+class2 = GymClass(spin, '7am', 30, location1, 8)
+class3 = GymClass(spin, '11am', 45, location1, 8)
+class4 = GymClass(spin, '2pm', 45, location1, 8)
+class5 = GymClass(spin, '5pm', 45, location1, 8)
+class6 = GymClass(spin, '6pm', 30, location1, 8)
+class7 = GymClass(pilates, '8am', 25, location2, 15)
+class8 = GymClass(pilates, '9am', 25, location2, 15)
+class9 = GymClass(pilates, '10am', 40, location2, 15)
+class10 = GymClass(pilates, '12pm', 40, location2, 15)
+class11 = GymClass(pilates, '3pm', 30, location2, 15)
+class12 = GymClass(hiit, '11am', 30, location2, 10)
+class13 = GymClass(hiit, '5pm', 30, location2, 10)
+class14 = GymClass(hiit, '8pm', 45, location2, 10)
+class15 = GymClass(aquafit, '1pm', 30, location3, 10)
 
 gym_classes = [class1, class2, class3, class4, class5, class6, class7, class8, class9, class10, class11, class12, class13, class14, class15]
 
