@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ gym_class.class_type.title }}</h1>
+<form action="/gym_classes/{{ gym_class.id }}" method="post">
+    <div>
+        <label for="start_time">Start time:</label>
+        <select name="start_time" id="start_time">
+            {% for start_time in start_times %}
+                <option value="{{ start_time }}"
+                {% if start_time == gym_class.start_time %}
+                selected                    
+                {% endif %}>
+                {{ start_time }}</option>                    
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="location">Location:</label>
+        <select name="location" id="location">
+            {% for location in locations %}
+                <option value="{{ location.id }}"
+                {% if location.id == gym_class.location.id %}
+                selected                 
+                {% endif %}>
+                {{ location.name}}</option>                    
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form_button">
+        <button type="submit">Update {{ gym_class.title }}</button>
+    </div>
+</form>
+
+{% endblock content %}

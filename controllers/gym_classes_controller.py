@@ -49,3 +49,18 @@ def show_gym_class(id):
     enrolled_members = member_repository.select_all_by_gym_class(id)
     gym_class.check_members_existing_booking(members, enrolled_members, unbooked_members)
     return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, attendees = attendees, availability = availability, unbooked_members = unbooked_members, class_types = class_type_repository.select_all() )
+
+
+# EDIT
+@gym_classes_blueprint.route("/gym_classes/<id>/edit")
+def edit_gym_class(id):
+    gym_class = gym_class_repository.select(id)
+    start_times = gym_class.class_type.find_available_class_times(gym_class.class_type.id)
+    start_times.insert(0, gym_class.start_time)
+    locations = location_repository.select_all()
+    return render_template("gym_classes/edit.html", gym_class = gym_class, start_times = start_times, locations = locations, class_types = class_type_repository.select_all())
+
+# CREATE
+@gym_classes_blueprint.route("/gym_classes/<id>", methods=['POST'])
+def update_gym_class(id):
+    
