@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>{{ gym_class.class_type.title }}</h1>
+
 <form action="/gym_classes/{{ gym_class.id }}" method="post">
     <div>
         <label for="start_time">Start time:</label>

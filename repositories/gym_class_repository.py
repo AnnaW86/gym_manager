@@ -84,6 +84,15 @@ def select_all_by_enrolled_member(id):
         gym_classes.append(gym_class)
     return gym_classes
 
+def update(gym_class):
+    sql = """
+        UPDATE gym_classes
+        SET (class_type_id, start_time, duration, location_id, capacity) = (%s, %s, %s, %s, %s)
+        WHERE id = %s
+    """
+    values = [gym_class.class_type.id, gym_class.start_time, gym_class.duration, gym_class.location.id, gym_class.capacity, gym_class.id]
+    run_sql(sql, values)
+
 def check_class_size(id):
     sql = """
         SELECT COUNT(*) FROM bookings
@@ -92,19 +101,7 @@ def check_class_size(id):
     values=[id]
     class_size = run_sql(sql, values)[0]['count']
     return class_size
-
-# def find_class_times(id):
-#     booked_start_times = []
-#     sql = """
-#         SELECT start_time FROM gym_classes
-#         WHERE id = %s
-#     """
-#     values = [id]
-#     results = run_sql(sql, values)
-#     for row in results:
-#         booked_start_times.append(row['start_time'])
-#     return booked_start_times
-
+    
 def find_number_of_classes_scheduled(id):
     sql = """
         SELECT COUNT(*) FROM gym_classes
