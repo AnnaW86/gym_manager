@@ -33,3 +33,4 @@ class GymClass:
                 start_time = start_time_repository.select(gym_class.start_time.id)
                 available_sessions.append(start_time)
         return available_sessions
+

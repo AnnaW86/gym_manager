@@ -1,6 +1,8 @@
+import imp
 from flask import Blueprint, render_template, redirect, request
 
 from models.gym_class import GymClass
+from models.class_type import ClassType
 from repositories import gym_class_repository, member_repository, start_time_repository, class_type_repository, location_repository
 
 gym_classes_blueprint = Blueprint("gym_classes", __name__)
@@ -17,7 +19,7 @@ def classes():
 def new_class(id):
     class_type = class_type_repository.select(id)
     class_types = class_type_repository.select_all()
-    start_times = start_time_repository.select_all()
+    start_times = class_type.find_available_class_times(id)
     locations = location_repository.select_all()
     return render_template("gym_classes/new.html", class_type = class_type, class_types = class_types, start_times = start_times, locations = locations)
 

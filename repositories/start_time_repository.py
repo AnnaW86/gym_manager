@@ -37,3 +37,23 @@ def select_all():
         time = StartTime(row['time'], row['id'])
         times.append(time)
     return times
+
+def select_all_ids():
+    time_ids = []
+    sql = "SELECT id FROM start_times"
+    results = run_sql(sql)
+    for row in results:
+        time_ids.append(row['id'])
+    return time_ids
+
+def select_all_ids_for_class_type(id):
+    times = []
+    sql = """
+        SELECT start_time_id FROM gym_classes
+        WHERE class_type_id = %s
+    """
+    values = [id]
+    results = run_sql(sql, values)
+    for row in results:
+        times.append(row['start_time_id'])
+    return times
