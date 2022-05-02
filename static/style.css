@@ -331,3 +331,26 @@ select, input {
     opacity: 0.5;
 }
 
+.gym_class {
+    display: block;
+}
+
+.gym_class_title {
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+
+
+.gym_class_info > div {
+    display: block;
+}
+
+.gym_class_info > div > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+

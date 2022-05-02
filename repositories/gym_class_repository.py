@@ -21,7 +21,7 @@ def select_all():
     gym_classes = []
     sql = """
         SELECT * FROM gym_classes
-        ORDER BY class_type_id
+        ORDER BY class_type_id, start_time
     """
     results = run_sql(sql)
     for row in results:
@@ -73,7 +73,7 @@ def select_all_by_enrolled_member(id):
         ON bookings.gym_class_id =
         gym_classes.id
         WHERE bookings.member_id = %s 
-        ORDER BY start_time
+        ORDER BY gym_classes.start_time
     """
     values = [id]
     results = run_sql(sql, values)

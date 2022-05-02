@@ -1,21 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section>
-    <section>
-        <p>Title: {{ gym_class.class_type.title }}</p>
+<section class="gym_class">
+    <div class="gym_class_title">
+        <h1>{{ gym_class.class_type.title }}</h1>
         <a href="/gym_classes/{{ gym_class.id }}/edit"><i class="material-icons">edit</i></a>
-        <p>Intensity:
-            {% for i in range(gym_class.class_type.intensity) %}
-            <span class="fa fa-star checked"></span>
-            {% endfor %}
-            {% for i in range(5 - gym_class.class_type.intensity)  %}
-            <span class="fa fa-star" id="unchecked"></span>  
-            {% endfor %}</p>
-        <p>Description: {{ gym_class.class_type.description }}</p>
-        <p>When: {{ gym_class.start_time }}</p>
-        <p>Where: {{gym_class.location.name }}</p>
-        
+    </div>
+
+    <section class="gym_class_info">
+        <hr>
+        <div>
+
+            <div>
+                <p>Intensity:</p>
+
+                <p>
+                    {% for i in range(gym_class.class_type.intensity) %}
+                    <span class="fa fa-star checked"></span>
+                    {% endfor %}
+                    {% for i in range(5 - gym_class.class_type.intensity)  %}
+                    <span class="fa fa-star" id="unchecked"></span>  
+                    {% endfor %}
+                </p>
+
+            </div>
+
+            <div>
+                <p>Description:</p>
+                <p> {{ gym_class.class_type.description }} </p>
+            </div>
+
+            <hr>
+
+            <div>
+                <p>When:</p>
+                <p> {{ gym_class.start_time }}</p>
+            </div>
+            <div>
+                <p>Duration:</p>
+                <p> {{ gym_class.duration }} minutes</p>
+            </div>
+
+            <div>
+                <p>Where:</p>
+                <p>{{gym_class.location.name }}</p>
+            </div>
+
+            <div>
+                <p>Capacity:</p>
+                <p>{{gym_class.capacity }}</p>
+            </div>
+                
+            <hr>
+        </div>
         <div class="attendee_list">
             <p>Attendees:</p>
             {% if number_of_attendees ==0 %}
@@ -47,7 +84,7 @@
                 <option value="{{ member.id }}">{{ member.get_full_name() }}</option>            
                 {% endfor %}
             </select>
-            <button type="submit">Add member</button>
+            <button type="submit">+ Add member</button>
         </form>
         {% else %}
         <p>This class is full</p>

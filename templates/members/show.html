@@ -10,6 +10,13 @@
             <h1>{{ member.get_full_name() }}</h1>
             <a href="/members/{{ member.id }}/edit"><i class="material-icons">edit</i></a>
         </div>
+
+        {% if member.active_status == False %}
+
+        <p>This account is no longer active</p>
+        
+        {% else %}
+ 
         <div class="additional_info">
             <p class="title">Membership Number:</p>
             <p>{{ member.membership_number }}</p>
@@ -17,7 +24,7 @@
 
         <div class="additional_info">
             <p class="title">Membership type:</p>
-            <p> {{member.membership_type.membership_type }}</p>
+            <p> {{member.membership_type.title.capitalize() }}</p>
         
         </div>
         
@@ -33,7 +40,7 @@
             </ul>
             {% endif %}
         </div>
-        {% if member.active_status == True %}
+        
             
         <form action="{{ member.id }}/add_booking" method="post">
             <label for="add_booking"></label>
@@ -47,10 +54,6 @@
                 <button type="submit">+ Add a booking</button>
             </div>
         </form>
-        
-        {% else %}
-
-        <p>This account is no longer active</p>
 
         {% endif %}
     </section>

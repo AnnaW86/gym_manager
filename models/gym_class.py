@@ -10,7 +10,7 @@ class GymClass:
         self.id = id
     
     def get_key_details(self):
-        return f"{self.start_time.time } { self.class_type.title }"
+        return f"{self.start_time } { self.class_type.title }"
     
     def check_availability(self):
         availability = self.capacity - gym_class_repository.check_class_size(self.id)

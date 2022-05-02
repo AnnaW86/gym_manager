@@ -20,14 +20,14 @@
          <div id="membership_radios">
             <label for="premium">Premium:</label>
             <input type="radio" id="premium" name="membership_type" value="premium"
-            {% if member.membership_type.membership_type == "premium" %}
+            {% if member.membership_type.title == "premium" %}
              checked   
             {% endif %}>
         </div>
         <div>
             <label for="off_peak">Off peak:</label>
             <input type="radio" id="off_peak" name="membership_type" value="off peak"
-            {% if member.membership_type.membership_type !="premium" %}
+            {% if member.membership_type.title !="premium" %}
             checked   
            {% endif %}>
         </div>

@@ -26,7 +26,7 @@ def new_class(id):
 # CREATE
 @gym_classes_blueprint.route("/gym_classes/class_type/<id>", methods = ['POST'])
 def create_class(id):
-    class_type = gym_class_repository.select(id).class_type
+    class_type = class_type_repository.select(id)
     start_time = request.form['start_time']
     duration = request.form['duration']
     location_id = request.form['location']
@@ -35,14 +35,6 @@ def create_class(id):
     gym_class = GymClass(class_type, start_time, duration, location, capacity)
     gym_class_repository.save(gym_class)
     return redirect(f"/class_types/{class_type.id}")
-
-# # UPDATE
-# @gym_classes_blueprint.route("/gym_classes/<id>", methods=['POST'])
-# def update_gym_class(id):
-    # breakpoint()
-
-
-    
 
 
 # SHOW
@@ -73,8 +65,10 @@ def edit_gym_class(id):
 def update_gym_class(id):
     gym_class = gym_class_repository.select(id)
     start_time = request.form['start_time']
+    duration = request.form['duration']
     location_id = request.form['location']
     location = location_repository.select(location_id)
-    gym_class = GymClass(gym_class.class_type, start_time, gym_class.duration, location, gym_class.capacity, id)
+    capacity = request.form['capacity']
+    gym_class = GymClass(gym_class.class_type, start_time, duration, location, capacity, id)
     gym_class_repository.update(gym_class)
     return redirect(f"/gym_classes/{id}")

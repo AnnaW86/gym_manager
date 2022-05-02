@@ -1,4 +1,3 @@
-from datetime import date
 from repositories import class_type_repository
 from helpers import date_time_helper
 
