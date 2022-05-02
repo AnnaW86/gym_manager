@@ -14,16 +14,27 @@
             <p class="title">Membership Number:</p>
             <p>{{ member.membership_number }}</p>
         </div>
+
+        <div class="additional_info">
+            <p class="title">Membership type:</p>
+            <p> {{member.membership_type.membership_type }}</p>
+        
+        </div>
         
         <div class="list">
-            <p>Enrolled classes:</p>
+            {% if number_of_bookings == 0 %}
+            <p>{{ member.first_name }} does not have any sessions booked.</p>        
+            {% else %}
+            <p>Booked sessions:</p>
             <ul>
                 {% for gym_class in enrolled_gym_classes %}
                 <a href="/gym_classes/{{ gym_class.id }}"><li> {{ gym_class.get_key_details() }}</li></a>
                 {% endfor %}
             </ul>
+            {% endif %}
         </div>
-        
+        {% if member.active_status == True %}
+            
         <form action="{{ member.id }}/add_booking" method="post">
             <label for="add_booking"></label>
             <div>
@@ -37,6 +48,11 @@
             </div>
         </form>
         
+        {% else %}
+
+        <p>This account is no longer active</p>
+
+        {% endif %}
     </section>
     <aside class="profile_avatar">
         <img src="/static/img/placeholder_avatar.png" alt="placeholder profile picture">

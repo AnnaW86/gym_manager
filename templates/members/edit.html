@@ -14,6 +14,42 @@
         <label for="membership_number">Membership number:</label>
         <input type="number" name="membership_number" id="membership_number" value="{{ member.membership_number }}" required>
     </div>
+    <div>
+        <label for="membership_radios">Membership type:</label>
+
+         <div id="membership_radios">
+            <label for="premium">Premium:</label>
+            <input type="radio" id="premium" name="membership_type" value="premium"
+            {% if member.membership_type.membership_type == "premium" %}
+             checked   
+            {% endif %}>
+        </div>
+        <div>
+            <label for="off_peak">Off peak:</label>
+            <input type="radio" id="off_peak" name="membership_type" value="off peak"
+            {% if member.membership_type.membership_type !="premium" %}
+            checked   
+           {% endif %}>
+        </div>
+    </div>
+    <div>
+        <label for="active_radios">Account status:</label>
+        <div id="active_radios">
+            <label for="activate">Active:</label>
+            <input type="radio" id="activate" name="account_status" value="active"
+            {% if member.active_status == True %}
+             checked   
+            {% endif %}>
+        </div>
+        <div>
+            <label for="deactivate">Deactivated:</label>
+            <input type="radio" id="deactivate" name="account_status" value="deactivated"
+            {% if member.active_status == False %}
+            checked   
+           {% endif %}>
+        </div>
+
+    </div>
     <div class="form_button">
         <button type="submit">Update {{ member.get_full_name() }}</button>
     </div>

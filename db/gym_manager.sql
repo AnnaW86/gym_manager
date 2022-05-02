@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS membership_types;
 
 CREATE TABLE membership_types (
     id SERIAL PRIMARY KEY,
-    membership_type VARCHAR(255)
+    title VARCHAR(255)
 );
 
 CREATE TABLE members (
@@ -41,7 +41,7 @@ CREATE TABLE start_times (
 CREATE TABLE gym_classes (
     id SERIAL PRIMARY KEY,
     class_type_id INT REFERENCES class_types(id),
-    start_time_id VARCHAR,
+    start_time_id INT REFERENCES start_times(id),
     duration INT,
     location_id INT REFERENCES locations(id),
     capacity INT

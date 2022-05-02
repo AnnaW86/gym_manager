@@ -3,9 +3,7 @@ body {
     font-size: 16px;
     background-color: teal;
     background-image: linear-gradient(to bottom right, teal, #555555);
-    /* background-image: linear-gradient(to bottom right, #79031D, red); */
     background-repeat: no-repeat;
-    /* rgb(199, 10, 10) */
     margin: 0px;
     color: white;
     min-height: 100vh;
@@ -141,11 +139,28 @@ body > div > section > section {
 .list {
     display: flex;
     justify-content: space-between;
-    /* align-items: baseline; */
 }
-.list p {
+.member_list {
+    display: flex;
+    width: 80%;
+    margin-bottom: 4em;
+}
+.member_list > div {
+    min-width: 300px;
+    margin-right: 2em;
+}
+.member_list ul {
+    margin-top: 30px;
+}
+
+.list h1 {
     margin: 0px;
 }
+
+.list > div {
+    margin-right: 2em;
+}
+
 .list ul {
     display: flex;
     flex-direction: column;
@@ -153,6 +168,7 @@ body > div > section > section {
 }
 .list li {
     background-color: transparent;
+    padding: 1px;
 }
 
 .additional_info {
@@ -161,6 +177,14 @@ body > div > section > section {
 }
 .additional_info .title {
     margin-right: 5em;
+}
+
+#add_booking {
+    display: block;
+    margin-top: 2em;
+}
+#add_booking * {
+    margin-top: 1em;
 }
 
 body > div > section > section > form > div {

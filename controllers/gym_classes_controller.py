@@ -40,11 +40,11 @@ def create_class(id):
 @gym_classes_blueprint.route("/gym_classes/<id>")
 def show_gym_class(id):
     gym_class = gym_class_repository.select(id)
+    number_of_attendees = member_repository.find_number_of_attendees(id)
     attendees = member_repository.select_all_by_gym_class(id)
     availability = gym_class.check_availability()
-    members =  member_repository.select_all()
+    members =  member_repository.select_all_active()
     unbooked_members = []
     enrolled_members = member_repository.select_all_by_gym_class(id)
     gym_class.check_members_existing_booking(members, enrolled_members, unbooked_members)
-    # number_of_classes_scheduled = gym_class_repository.find_number_of_classes_scheduled(id)
-    return render_template("gym_classes/show.html", gym_class = gym_class, attendees = attendees, availability = availability, unbooked_members = unbooked_members, class_types = class_type_repository.select_all() )
+    return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, attendees = attendees, availability = availability, unbooked_members = unbooked_members, class_types = class_type_repository.select_all() )

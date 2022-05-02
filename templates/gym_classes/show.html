@@ -8,11 +8,17 @@
         <p>Description: {{ gym_class.class_type.description }}</p>
         <p>When: {{ gym_class.start_time.time }}</p>
         <p>Where: {{gym_class.location.name }}</p>
+        
         <div class="attendee_list">
             <p>Attendees:</p>
+            {% if number_of_attendees ==0 %}
+            
+            <p>There are currently no bookings for this session</p>
+    
+            {% else %}
             {% for attendee in attendees %}
                 <div class="attendee">
-                    <p>{{ attendee.get_full_name() }}</p>
+                    <p><a href="/members/{{ attendee.id }}">{{ attendee.get_full_name() }}</a></p>
                         <form action="{{ attendee.id }}/delete_booking" method='POST'>
                         <button class="delete_button"><span class="material-symbols-outlined">
                             disabled_by_default
@@ -21,9 +27,12 @@
                 </div>         
             {% endfor %}
         </div>
-        {% if availability > 0 %}
             
-        <form action="{{ gym_class.id }}/add_booking" method="post">
+        {% endif %}
+
+        {% if availability > 0 %}
+
+        <form id="add_booking" action="{{ gym_class.id }}/add_booking" method="post">
             <label for="add_booking"> Add member to this class:</label>
             <select name="add_booking" id="add_booking">
                 <option value="None">--</option>
@@ -34,9 +43,10 @@
             <button type="submit">Add member</button>
         </form>
         {% else %}
-            <p>This class is full</p>
+        <p>This class is full</p>
         {% endif %}
-
+        
+        
     </section>
 </section>
     
