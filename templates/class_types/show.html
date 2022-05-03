@@ -43,6 +43,11 @@
                                 <p>{{ gym_class.start_time }}</p>
                                 <p>{{ gym_class.duration }} mins</p>
                                 <p>In the {{ gym_class.location.name.lower() }}</p>
+                                {% if class_sizes[gym_class.id]%}
+                                    <p class="remaining_spaces"> {{ gym_class.capacity - class_sizes[gym_class.id] }} space(s) remaining</p>
+                                {% else %}
+                                    <p class="remaining_spaces"> {{ gym_class.capacity }} spaces remaining</p>
+                                {% endif %}
                             </div>  
                         </div>
                     </a>    

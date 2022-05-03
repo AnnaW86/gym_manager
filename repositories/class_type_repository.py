@@ -62,3 +62,19 @@ def select_all_booked_times(id):
         times.append(row['start_time'])
     return times
 
+def find_availability_in_class_type_object(id):
+    class_sizes = {}
+    sql = """
+        SELECT bookings.gym_class_id, COUNT(*)
+        FROM bookings
+        INNER JOIN gym_classes
+        ON gym_classes.id = bookings.gym_class_id
+        WHERE gym_classes.class_type_id = %s
+        GROUP BY bookings.gym_class_id
+    """
+    values = [id]
+    results = run_sql(sql, values)
+    for row in results:
+        class_sizes[row['gym_class_id']] = row['count']
+    return class_sizes
+

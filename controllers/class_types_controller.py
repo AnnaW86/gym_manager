@@ -31,7 +31,8 @@ def show_class_type(id):
     class_type = class_type_repository.select(id)
     filtered_classes = gym_class_repository.select_by_class_type_id(id)
     number_of_scheduled_classes = gym_class_repository.find_number_of_classes_scheduled(id)
-    return render_template("class_types/show.html", class_type = class_type, filtered_classes = filtered_classes, number_of_scheduled_classes = number_of_scheduled_classes, class_types = class_type_repository.select_all())
+    class_sizes = class_type_repository.find_availability_in_class_type_object(id)
+    return render_template("class_types/show.html", class_type = class_type, filtered_classes = filtered_classes, number_of_scheduled_classes = number_of_scheduled_classes, class_sizes = class_sizes, class_types = class_type_repository.select_all())
 
 # EDIT
 @class_types_blueprint.route("/class_types/<id>/edit")
