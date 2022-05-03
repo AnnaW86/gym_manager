@@ -39,9 +39,10 @@ def show_member(id):
     for gym_class in all_gym_classes:
         if gym_class.check_availability() > 0:
             available_classes.append(gym_class)
-    bookable_classes = []
+    
     number_of_bookings = member_repository.find_number_of_bookings(id)
-    member.check_existing_booking(enrolled_gym_classes, available_classes, bookable_classes)
+    unbooked_classes = member.check_existing_booking(enrolled_gym_classes, available_classes)
+    bookable_classes = member.find_bookable_classes(unbooked_classes)
     return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, bookable_classes = bookable_classes, number_of_bookings = number_of_bookings, class_types = class_type_repository.select_all())
 
 # EDIT

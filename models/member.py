@@ -12,16 +12,27 @@ class Member:
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
     
-    def check_existing_booking(self, enrolled_gym_classes, available_classes, bookable_classes):
+    def check_existing_booking(self, enrolled_gym_classes, available_classes):
+        unbooked_classes = []
         for available_class in available_classes:
             booked = False
             for enrolled_class in enrolled_gym_classes:
                 if available_class.id == enrolled_class.id:
                     booked = True
             if booked == False:
-                bookable_classes.append(available_class)
-        return bookable_classes
+                unbooked_classes.append(available_class)
+        return unbooked_classes
     
+    def find_bookable_classes(self, unbooked_classes):
+        bookable_classes = []
+        if self.membership_type.title == 'premium':
+            return unbooked_classes
+        else:
+            for unbooked_class in unbooked_classes:
+                if unbooked_class.start_time in date_time_helper.off_peak_times:
+                    bookable_classes.append(unbooked_class)
+            return bookable_classes
+
     def mark_active_member(self):
         self.active_status = True
 

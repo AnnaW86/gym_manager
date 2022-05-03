@@ -49,12 +49,6 @@ def show_gym_class(id):
     enrolled_members = member_repository.select_all_by_gym_class(id)
     unbooked_members = gym_class.check_members_existing_booking(members, enrolled_members)
     bookable_members = gym_class.find_bookable_members(unbooked_members)
-    # breakpoint()
-    # if gym_class.start_time in date_time_helper.off_peak_times:
-    #     for member in unbooked_members:
-    #         if member.check_off_peak_membership() == True:
-    #             bookable_members.append(member)
-    
     return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, attendees = attendees, availability = availability, bookable_members = bookable_members, class_types = class_type_repository.select_all() )
 
 
