@@ -34,11 +34,15 @@
             <input type="number" id="capacity" name="capacity" required />
         </div>
         <div>
-            <button type="submit">+ Add Class</button>
+            <button type="submit"><span class="material-symbols-outlined">
+                add
+                </span> Add session</button>
         </div>
     
     </form>
-
+    <a href="/class_types/{{class_type.id}}"><button type="button" class="back_button">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Back to {{ class_type.title }} sessions</button></a>
 
 <!-- </div> -->
 

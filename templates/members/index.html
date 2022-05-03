@@ -2,15 +2,23 @@
 
 {% block content %}
 
-<div class="member_list">
+<div id="member_list">
     <div>
         <h1>Active members:</h1>
         <p>(Select a name for more details)</p>
-        
     </div>
-    <ul id = "member_list">
+    <ul class = "member_list"> <h2>Premium members:</h2>
         {% for member in active_members %}
+            {% if member.membership_type.title == 'premium'  %}
+            <li><a href="/members/{{ member.id }}">{{ member.get_full_name() }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <ul class = "member_list"><h2>Off peak members:</h2>
+        {% for member in active_members %}
+        {% if member.membership_type.title == 'off peak'  %}
         <li><a href="/members/{{ member.id }}">{{ member.get_full_name() }}</a></li>
+        {% endif %}
         {% endfor %}
     </ul>
     

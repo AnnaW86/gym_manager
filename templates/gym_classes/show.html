@@ -84,14 +84,18 @@
                 <option value="{{ member.id }}">{{ member.get_full_name() }}</option>            
                 {% endfor %}
             </select>
-            <button type="submit">+ Add member</button>
+            <button type="submit" id="add_booking_button"><span class="material-symbols-outlined">
+                add</span>Add member</button>
         </form>
         {% else %}
         <p>This class is full</p>
         {% endif %}
         
-        
     </section>
+    <a href="/class_types/{{gym_class.class_type.id}}"><button type="button" class="back_button">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Back to {{ gym_class.class_type.title }} sessions</button></a>
+</div>
 </section>
     
 {% endblock content %}

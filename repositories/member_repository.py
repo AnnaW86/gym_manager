@@ -113,11 +113,11 @@ def find_number_of_attendees(id):
     return number_of_attendees
 
 
-def find_number_of_bookings(id):
+def find_available_places(id):
     sql = """
         SELECT COUNT(*) FROM bookings
         WHERE member_id = %s 
     """
     values = [id]
-    number_of_bookings = run_sql(sql, values)[0]['count']
-    return number_of_bookings
+    available_places = run_sql(sql, values)[0]['count']
+    return available_places

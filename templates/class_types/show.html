@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div>
+<div class="class_types_show">
     <div class="section_info">
 
         <div>
@@ -35,21 +35,29 @@
                 
                 <section class="object_container">
                     <a href="/gym_classes/{{ gym_class.id }}">
-                        {{ gym_class.class_type.title }}
-                        <hr>
+                        
                         <div>
-                            <p>{{ gym_class.start_time }}</p>
-                            <p>{{ gym_class.duration }} mins</p>
-                            <p>In the {{ gym_class.location.name.lower() }}</p>
-                        </div>  
+                            <p>{{ gym_class.class_type.title }}</p>
+                            <hr>
+                            <div>
+                                <p>{{ gym_class.start_time }}</p>
+                                <p>{{ gym_class.duration }} mins</p>
+                                <p>In the {{ gym_class.location.name.lower() }}</p>
+                            </div>  
+                        </div>
                     </a>    
                 </section>
                 {% endif %}
             {% endfor %}
-
     </section>
-    <a href="/class_types/{{class_type.id }}/new_session"><button>+ Add new session</button></a>
-    
+    <div id="button_group">
+        <a href="/class_types/{{ class_type.id }}/new_session"><button><span class="material-symbols-outlined">
+            add
+            </span> Add new session</button></a>
+        <a href="/class_types"><button type="button" class="back_button">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to classes</button></a>
+    </div>
 </div>
 
 

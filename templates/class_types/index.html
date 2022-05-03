@@ -10,25 +10,29 @@
         {% for class_type in class_types %}
         <section class="object_container">
             <a href="/class_types/{{ class_type.id }}">
-                {{ class_type.title }}
-                <hr>
                 <div>
-                    <p>Intensity level: 
-                        {% for i in range(class_type.intensity) %}
-                        <span class="fa fa-star checked"></span>
-                        {% endfor %}
-                        {% for i in range(5 - class_type.intensity)  %}
-                        <span class="fa fa-star" id="unchecked"></span>  
-                        {% endfor %}
-                    </p>
-                    <p>{{ class_type.description }} </p>
+                    <p>{{ class_type.title }}</p>
+                    <hr>
+                    <div>
+                        <p>Intensity level: 
+                            {% for i in range(class_type.intensity) %}
+                            <span class="fa fa-star checked"></span>
+                            {% endfor %}
+                            {% for i in range(5 - class_type.intensity)  %}
+                            <span class="fa fa-star" id="unchecked"></span>  
+                            {% endfor %}
+                        </p>
+                        <p>{{ class_type.description }} </p>
+                    </div>
                 </div>
             </a>      
-        </section>
+            </section>
         {% endfor %}
     </section>
     
 </div>
-<a href="/class_types/new"><button>+ Add new class</button></a>
+<a href="/class_types/new"><button><span class="material-symbols-outlined">
+    add
+    </span> Add new class</button></a>
 
 {% endblock content %}

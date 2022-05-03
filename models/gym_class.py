@@ -16,7 +16,7 @@ class GymClass:
         return f"{self.start_time } { self.class_type.title }"
     
     def check_availability(self):
-        availability = self.capacity - gym_class_repository.check_class_size(self.id)
+        availability = self.capacity - gym_class_repository.number_of_bookings(self.id)
         return availability
     
     def check_members_existing_booking(self, members, enrolled_members):

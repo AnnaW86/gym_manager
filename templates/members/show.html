@@ -29,7 +29,7 @@
         </div>
         
         <div class="list">
-            {% if number_of_bookings == 0 %}
+            {% if available_places == 0 %}
             <p>{{ member.first_name }} does not have any sessions booked.</p>        
             {% else %}
             <p>Booked sessions:</p>
@@ -51,11 +51,18 @@
                     <option value="{{ gym_class.id }}">{{ gym_class.get_key_details() }}</option>            
                     {% endfor %}
                 </select>
-                <button type="submit">+ Add a booking</button>
+                <button type="submit"><span class="material-symbols-outlined">
+                    add
+                    </span> Add a booking</button>
             </div>
         </form>
 
         {% endif %}
+
+        <a href="/members"><button type="button" class="back_button">
+            <span class="material-symbols-outlined">
+            arrow_back
+            </span>Back to members list</button></a>
     </section>
     <aside class="profile_avatar">
         <img src="/static/img/placeholder_avatar.png" alt="placeholder profile picture">

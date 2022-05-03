@@ -16,6 +16,15 @@ def delete_all():
     sql = "DELETE FROM membership_types"
     run_sql(sql)
 
+def select_all():
+    membership_types = []
+    sql = "SELECT * FROM membership_types"
+    results = run_sql(sql)
+    for row in results:
+        membership_type = MembershipType(row['title'], row['id'])
+        membership_types.append(membership_type)
+    return membership_types
+
 def select(id):
     membership_type = None
     sql = """

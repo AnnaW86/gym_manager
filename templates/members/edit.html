@@ -55,5 +55,9 @@
     </div>
 </form>
 
+<a href="/members/{{ member.id }}"><button type="button" class="back_button">
+    <span class="material-symbols-outlined">arrow_back</span>
+    Back to {{ member.get_full_name() }}</button></a>
+
 {% endblock content %}
 

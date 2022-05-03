@@ -30,20 +30,29 @@ a {
     margin-right: 40px
 }
 .material-icons {
-    color: #8B8681;
+    color:#FFDB58;
     width: 0px;
     height: 0px;
 }
 
 .menu_headings {
     width: 100px;
+    cursor: default;
 }
 .menu_headings li a{
-    padding: 4px;
+    padding: 10px;
 }
 
 .session_headings {
-    padding: 4px;
+    padding: 10px;
+    cursor: default;
+    width: 160px;
+    white-space: nowrap;
+}
+
+.menu_headings * {
+    z-index: 1;
+    position: relative;
 }
 ul {
     list-style: none;
@@ -58,23 +67,24 @@ ul li {
     position: relative;
     float: left;
     background-color: #555555;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 li ul {display: none;}
 
 ul li a {
     display: block;
-    /* padding: 1em; */
     text-decoration: none;
     white-space: nowrap;
 }
 
 ul li a:hover {
-    background-color: #8B8681;
+    background-color: #FFDB58;
+    color: #555555;
 }
 .session_headings:hover {
-    background-color: #8B8681;
+    background-color: #FFDB58;
+    color: #555555;
 }
 
 li:hover > ul {
@@ -84,7 +94,7 @@ li:hover > ul {
 
 li:hover li {float: none;}
 li:hover a {background-color: #555555;}
-li:hover li a:hover {background-color: #8B8681;}
+li:hover li a:hover {background-color: #FFDB58; color: #555555;}
 .menu li ul li {border-top: 0;}
 
 ul ul ul {
@@ -115,12 +125,33 @@ body > div {
     background: url('/static/img/index_background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     padding: 0px;
     margin: 0px;
     min-height: 100vh;
     min-width: 100vw
 }
 
+.homepage h1 {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-family: 'Russo One', sans-serif;
+    font-size: 48px;
+    color:teal;
+}
+
+.homepage h2 {
+    margin: 0px;
+    color: black;
+}
+
+.homepage div {
+    border: 10px solid teal;
+    border-radius: 10px;
+    padding: 10px;
+}
 body > div > section {
     display: flex;
     /* margin-right: 2em; */
@@ -136,21 +167,41 @@ body > div > section > section {
     align-items: baseline;
 }
 
+.object_container {
+    min-height: 180px;
+    padding: 0px 0px 0px 10px;
+}
 .list {
     display: flex;
     justify-content: space-between;
 }
-.member_list {
+#member_list {
     display: flex;
-    width: 80%;
+    justify-content: space-between;
+    width: auto;
     margin-bottom: 4em;
 }
-.member_list > div {
+#member_list > div {
     min-width: 300px;
     margin-right: 2em;
 }
-.member_list ul {
+#member_list ul {
     margin-top: 30px;
+}
+
+.member_list li {
+    background-color: transparent;
+}
+
+.member_list {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    padding-right: 30px;
+}
+
+.member_list h2 {
+    margin-top: 0px
 }
 
 .list h1 {
@@ -173,6 +224,7 @@ body > div > section > section {
 
 .additional_info {
     display: flex;
+    justify-content: space-between;
     align-items: baseline;
 }
 .additional_info .title {
@@ -203,8 +255,15 @@ body > div > section > section > form > div > button {
     border-radius: 5px;
 } 
 
+body > div > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px;
+}
+
 body > div > form > div {
-    margin-bottom: 3em;
+    /* margin-bottom: 3em; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -229,15 +288,18 @@ body > div > div > section > section {
     float: absolute;
 }
 
+.class_types_show {
+    width: 100%;
+}
 .section_info {
     display: flex;
     justify-content: space-between;
+    padding-right: 50px;
 
 }
 
 .section_info > div {
-    min-width: 250px;
-    margin-right: 150px;
+    width: 250px;
 }
 
 .section_info > div > div {
@@ -266,14 +328,10 @@ hr {
 body > div > section > section > ul {
       padding-left: 0px;
   }
-/* 
-.attendee_list {
-    display: inline;
-  } */
+
 
 .attendee {
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
   }
 
@@ -294,10 +352,13 @@ select, button, input, textarea {
   }
 
 button {
-    background-color: #8B8681;
-    color: white;
+    background-color: #FFDB58;
+    color: #555555;
     padding: 5px;
     font-size: 16px;
+    height: 24px;
+    display: flex;
+    align-items: center;
 }
 
 select, input {
@@ -312,15 +373,6 @@ select, input {
 
 
 
-#member_list li {
-    background-color: transparent;
-}
-
-#member_list {
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-}
 
 .checked {
    color:white;
@@ -342,8 +394,6 @@ select, input {
     align-items: baseline;
 }
 
-
-
 .gym_class_info > div {
     display: block;
 }
@@ -353,4 +403,17 @@ select, input {
     justify-content: space-between;
 }
 
+.back_button {
+    margin-top: 20px;
+    background-color: #cae8dc;
+}
 
+
+#button_group {
+    display: flex;
+    flex-direction: column;
+}
+
+#add_booking span {
+    margin-top: 0px;
+}

@@ -7,11 +7,12 @@ from repositories import member_repository, gym_class_repository, class_type_rep
 members_blueprint = Blueprint("members", __name__)
 
 # INDEX
-@members_blueprint.route("/members")
+@members_blueprint.route("/members", methods=['GET'])
 def members():
     active_members = member_repository.select_all_active()
     deactivated_members = member_repository.select_all_by_deactivated()
-    return render_template("members/index.html", active_members = active_members, deactivated_members = deactivated_members, class_types = class_type_repository.select_all())
+    membership_types = membership_type_repository.select_all()
+    return render_template("members/index.html", active_members = active_members, deactivated_members = deactivated_members, membership_types = membership_types, class_types = class_type_repository.select_all())
 
 # NEW
 @members_blueprint.route("/members/new")
@@ -34,16 +35,18 @@ def create_member():
 def show_member(id):
     member = member_repository.select(id)
     enrolled_gym_classes = gym_class_repository.select_all_by_enrolled_member(id)
-    all_gym_classes = gym_class_repository.select_all()
+    
+    # Move next five lines to repository
+    all_gym_classes = gym_class_repository.select_all_ordered_by_start_time()
     available_classes = []
     for gym_class in all_gym_classes:
         if gym_class.check_availability() > 0:
             available_classes.append(gym_class)
     
-    number_of_bookings = member_repository.find_number_of_bookings(id)
+    available_places = member_repository.find_available_places(id)
     unbooked_classes = member.check_existing_booking(enrolled_gym_classes, available_classes)
     bookable_classes = member.find_bookable_classes(unbooked_classes)
-    return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, bookable_classes = bookable_classes, number_of_bookings = number_of_bookings, class_types = class_type_repository.select_all())
+    return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, bookable_classes = bookable_classes, available_places = available_places, class_types = class_type_repository.select_all())
 
 # EDIT
 @members_blueprint.route("/members/<id>/edit")
@@ -68,3 +71,14 @@ def update_member(id):
     member = Member(first_name, last_name, membership_number, membership_type, active_status, id)
     member_repository.update(member)
     return redirect(f"/members/{id}")
+
+# FILTER
+# @members_blueprint.route("/members/filter", methods=['POST'])
+# def filter_members():
+#     membership_type_id = request.form['filter_members']
+#     membership_type = membership_type_repository.select(membership_type_id)
+#     # active_members = member_repository.select_all_active()
+#     # deactivated_members = member_repository.select_all_by_deactivated()
+#     # membership_types = membership_type_repository.select_all()
+#     # return render_template("members/index.html", active_members = active_members, deactivated_members = deactivated_members, membership_type = membership_type, membership_types = membership_types, class_types = class_type_repository.select_all())
+#     return redirect("/members", membership_type = membership_type)

@@ -31,6 +31,20 @@ def select_all():
         gym_classes.append(gym_class)
     return gym_classes
 
+def select_all_ordered_by_start_time():
+    gym_classes = []
+    sql = """
+        SELECT * FROM gym_classes
+        ORDER BY start_time
+    """
+    results = run_sql(sql)
+    for row in results:
+        class_type = class_type_repository.select(row['class_type_id'])
+        location = location_repository.select(row['location_id'])
+        gym_class = GymClass(class_type, row['start_time'], row['duration'],location, row['capacity'], row['id'])
+        gym_classes.append(gym_class)
+    return gym_classes
+
 def select(id):
     gym_class = None
     sql = """
@@ -93,7 +107,7 @@ def update(gym_class):
     values = [gym_class.class_type.id, gym_class.start_time, gym_class.duration, gym_class.location.id, gym_class.capacity, gym_class.id]
     run_sql(sql, values)
 
-def check_class_size(id):
+def number_of_bookings(id):
     sql = """
         SELECT COUNT(*) FROM bookings
         WHERE gym_class_id = %s
