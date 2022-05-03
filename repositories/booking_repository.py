@@ -17,24 +17,13 @@ def delete_all():
     sql = "DELETE FROM bookings"
     run_sql(sql)
 
-def delete (id):
+def delete(id):
     sql = """
         DELETE FROM bookings
         WHERE member_id = %s
     """
     values = [id]
     run_sql(sql, values)
-
-def select_all():
-    bookings = []
-    sql = "SELECT * FROM bookings"
-    results = run_sql(sql)
-    for row in results:
-        member = member_repository.select(row['member_id'])
-        gym_class = gym_class_repository.select(row['gym_class_id'])
-        booking = Booking(member, gym_class, row['id'])
-        bookings.append(booking)
-    return bookings
 
 def delete_all_by_member_id(id):
     sql =  "DELETE FROM bookings WHERE member_id = %s"

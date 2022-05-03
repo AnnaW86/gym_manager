@@ -1,4 +1,3 @@
-from zoneinfo import available_timezones
 from flask import Blueprint, render_template, request, redirect
 
 from models.member import Member
@@ -35,17 +34,10 @@ def create_member():
 def show_member(id):
     member = member_repository.select(id)
     enrolled_gym_classes = gym_class_repository.select_all_by_enrolled_member(id)
-    
-    # Move next five lines to repository
-    all_gym_classes = gym_class_repository.select_all_ordered_by_start_time()
-    available_classes = []
-    for gym_class in all_gym_classes:
-        if gym_class.check_availability() > 0:
-            available_classes.append(gym_class)
-    
+    available_classes = gym_class_repository.find_available_classes()
     available_places = member_repository.find_available_places(id)
-    unbooked_classes = member.check_existing_booking(enrolled_gym_classes, available_classes)
-    bookable_classes = member.find_bookable_classes(unbooked_classes)
+    unbooked_classes = gym_class_repository.find_unbooked_classes(enrolled_gym_classes, available_classes)
+    bookable_classes = gym_class_repository.find_bookable_classes(member, unbooked_classes)
     return render_template("members/show.html", member = member, enrolled_gym_classes = enrolled_gym_classes, bookable_classes = bookable_classes, available_places = available_places, class_types = class_type_repository.select_all())
 
 # EDIT
@@ -57,6 +49,7 @@ def edit_member(id):
 # UPDATE
 @members_blueprint.route("/members/<id>", methods=['POST'])
 def update_member(id):
+    member = member_repository.select(id)
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     membership_number = request.form['membership_number']
@@ -64,21 +57,10 @@ def update_member(id):
     membership_type = membership_type_repository.select_from_type(membership_type_title)
     active_status_feedback = request.form['account_status']
     if active_status_feedback == 'deactivated':
-        active_status = False
+        member.mark_deactivated_member()
         booking_repository.delete_all_by_member_id(id)
     if active_status_feedback == 'active':
-        active_status = True
-    member = Member(first_name, last_name, membership_number, membership_type, active_status, id)
+        member.mark_active_member()
+    member = Member(first_name, last_name, membership_number, membership_type, member.active_status, id)
     member_repository.update(member)
     return redirect(f"/members/{id}")
-
-# FILTER
-# @members_blueprint.route("/members/filter", methods=['POST'])
-# def filter_members():
-#     membership_type_id = request.form['filter_members']
-#     membership_type = membership_type_repository.select(membership_type_id)
-#     # active_members = member_repository.select_all_active()
-#     # deactivated_members = member_repository.select_all_by_deactivated()
-#     # membership_types = membership_type_repository.select_all()
-#     # return render_template("members/index.html", active_members = active_members, deactivated_members = deactivated_members, membership_type = membership_type, membership_types = membership_types, class_types = class_type_repository.select_all())
-#     return redirect("/members", membership_type = membership_type)

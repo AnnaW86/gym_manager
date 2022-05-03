@@ -1,6 +1,7 @@
 from db.run_sql import run_sql
 from models.gym_class import GymClass
 from repositories import class_type_repository, location_repository
+from helpers.date_time_helper import all_start_times, off_peak_times
 
 def save(gym_class):
     sql = """
@@ -125,4 +126,43 @@ def find_number_of_classes_scheduled(id):
     number_of_classes = run_sql(sql, values)[0]['count']
     return number_of_classes
 
+def find_available_class_times(id):
+    available_class_times = []
+    existing_bookings = class_type_repository.select_all_booked_times(id)
+    for time in all_start_times:
+        if time not in existing_bookings:
+            available_class_times.append(time)
+    return available_class_times
 
+def available_places(gym_class):
+    availability = gym_class.capacity - number_of_bookings(gym_class.id)
+    return availability
+
+def find_available_classes():
+    all_gym_classes = select_all_ordered_by_start_time()
+    available_classes = []
+    for gym_class in all_gym_classes:
+        if available_places(gym_class) > 0:
+            available_classes.append(gym_class)
+    return available_classes
+
+def find_unbooked_classes(enrolled_gym_classes, available_classes):
+    unbooked_classes = []
+    for available_class in available_classes:
+        booked = False
+        for enrolled_class in enrolled_gym_classes:
+            if available_class.id == enrolled_class.id:
+                booked = True
+        if booked == False:
+            unbooked_classes.append(available_class)
+    return unbooked_classes
+
+def find_bookable_classes(member, unbooked_classes):
+    bookable_classes = []
+    if member.membership_type.title == 'premium':
+        return unbooked_classes
+    else:
+        for unbooked_class in unbooked_classes:
+            if unbooked_class.start_time in off_peak_times:
+                bookable_classes.append(unbooked_class)
+        return bookable_classes

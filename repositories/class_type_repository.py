@@ -48,16 +48,7 @@ def update(class_type):
         WHERE id = %s
     """
     values = [class_type.title, class_type.intensity, class_type.description, class_type.id]
-    run_sql(sql, values)
-
-def select_ids():
-    ids = []
-    sql = "SELECT id FROM class_types"
-    results = run_sql(sql)
-    for row in results:
-        id = row['id']
-        ids.append(id)
-    return ids    
+    run_sql(sql, values)   
 
 def select_all_booked_times(id):
     times = []
@@ -70,3 +61,4 @@ def select_all_booked_times(id):
     for row in results:
         times.append(row['start_time'])
     return times
+

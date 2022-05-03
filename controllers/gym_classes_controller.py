@@ -1,10 +1,8 @@
 from flask import Blueprint, render_template, redirect, request
 
 from models.gym_class import GymClass
-from models.class_type import ClassType
-from models.member import Member
 from repositories import gym_class_repository, member_repository, class_type_repository, location_repository
-from helpers import date_time_helper
+
 
 gym_classes_blueprint = Blueprint("gym_classes", __name__)
 
@@ -20,7 +18,7 @@ def classes():
 def new_class(id):
     class_type = class_type_repository.select(id)
     class_types = class_type_repository.select_all()
-    start_times = class_type.find_available_class_times(id)
+    start_times = gym_class_repository.find_available_class_times(id)
     locations = location_repository.select_all()
     return render_template("gym_classes/new.html", class_type = class_type, class_types = class_types, start_times = start_times, locations = locations)
 
@@ -44,11 +42,11 @@ def show_gym_class(id):
     gym_class = gym_class_repository.select(id)
     number_of_attendees = member_repository.find_number_of_attendees(id)
     attendees = member_repository.select_all_by_gym_class(id)
-    availability = gym_class.check_availability()
+    availability = gym_class_repository.available_places(gym_class)
     members =  member_repository.select_all_active()
     enrolled_members = member_repository.select_all_by_gym_class(id)
-    unbooked_members = gym_class.check_members_existing_booking(members, enrolled_members)
-    bookable_members = gym_class.find_bookable_members(unbooked_members)
+    unbooked_members = member_repository.get_members_without_booking(members, enrolled_members)
+    bookable_members = member_repository.find_bookable_members(gym_class, unbooked_members)
     return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, attendees = attendees, availability = availability, bookable_members = bookable_members, class_types = class_type_repository.select_all() )
 
 
@@ -56,7 +54,7 @@ def show_gym_class(id):
 @gym_classes_blueprint.route("/gym_classes/<id>/edit")
 def edit_gym_class(id):
     gym_class = gym_class_repository.select(id)
-    start_times = gym_class.class_type.find_available_class_times(gym_class.class_type.id)
+    start_times = gym_class_repository.find_available_class_times(gym_class.class_type.id)
     start_times.insert(0, gym_class.start_time)
     locations = location_repository.select_all()
     return render_template("gym_classes/edit.html", gym_class = gym_class, start_times = start_times, locations = locations, class_types = class_type_repository.select_all())

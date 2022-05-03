@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, request, redirect
 
 from models.booking import Booking
 from repositories import booking_repository, gym_class_repository, member_repository

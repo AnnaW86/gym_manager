@@ -1,6 +1,7 @@
 from db.run_sql import run_sql
 from models.member import Member
 from repositories import membership_type_repository
+from helpers.date_time_helper import check_if_off_peak_time
 
 def save(member):
     sql = """
@@ -121,3 +122,24 @@ def find_available_places(id):
     values = [id]
     available_places = run_sql(sql, values)[0]['count']
     return available_places
+
+def get_members_without_booking(members, enrolled_members):
+    unbooked_members = []
+    for member in members:
+        booked = False
+        for enrolled_member in enrolled_members:
+            if member.id == enrolled_member.id:
+                booked = True
+        if booked == False:
+            unbooked_members.append(member)
+    return unbooked_members
+
+def find_bookable_members(gym_class, members):
+    bookable_members = []
+    if check_if_off_peak_time(gym_class.start_time):
+        return members
+    else:
+        for member in members:
+            if member.check_premium_member():
+                bookable_members.append(member)
+        return bookable_members
