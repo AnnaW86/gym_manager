@@ -80,7 +80,7 @@
             <label for="add_booking"> Add member to this class:</label>
             <select name="add_booking" id="add_booking">
                 <option value="None">--</option>
-                {% for member in unbooked_members %}
+                {% for member in bookable_members %}
                 <option value="{{ member.id }}">{{ member.get_full_name() }}</option>            
                 {% endfor %}
             </select>

@@ -1,4 +1,7 @@
 from repositories import gym_class_repository
+from helpers import date_time_helper
+from models.member import Member
+
 
 class GymClass:
     def __init__(self, class_type, start_time, duration, location, capacity, id=None):
@@ -16,7 +19,8 @@ class GymClass:
         availability = self.capacity - gym_class_repository.check_class_size(self.id)
         return availability
     
-    def check_members_existing_booking(self, members, enrolled_members, unbooked_members):
+    def check_members_existing_booking(self, members, enrolled_members):
+        unbooked_members = []
         for member in members:
             booked = False
             for enrolled_member in enrolled_members:
@@ -25,7 +29,14 @@ class GymClass:
             if booked == False:
                 unbooked_members.append(member)
         return unbooked_members
-
-    
-
+        
+    def find_bookable_members(self, members):
+        bookable_members = []
+        if date_time_helper.check_off_peak_time(self.start_time):
+            return members
+        else:
+            for member in members:
+                if member.check_premium_member():
+                    bookable_members.append(member)
+            return bookable_members
 

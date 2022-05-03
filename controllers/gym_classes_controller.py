@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, request
 
 from models.gym_class import GymClass
 from models.class_type import ClassType
+from models.member import Member
 from repositories import gym_class_repository, member_repository, class_type_repository, location_repository
 from helpers import date_time_helper
 
@@ -45,10 +46,16 @@ def show_gym_class(id):
     attendees = member_repository.select_all_by_gym_class(id)
     availability = gym_class.check_availability()
     members =  member_repository.select_all_active()
-    unbooked_members = []
     enrolled_members = member_repository.select_all_by_gym_class(id)
-    gym_class.check_members_existing_booking(members, enrolled_members, unbooked_members)
-    return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, attendees = attendees, availability = availability, unbooked_members = unbooked_members, class_types = class_type_repository.select_all() )
+    unbooked_members = gym_class.check_members_existing_booking(members, enrolled_members)
+    bookable_members = gym_class.find_bookable_members(unbooked_members)
+    # breakpoint()
+    # if gym_class.start_time in date_time_helper.off_peak_times:
+    #     for member in unbooked_members:
+    #         if member.check_off_peak_membership() == True:
+    #             bookable_members.append(member)
+    
+    return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, attendees = attendees, availability = availability, bookable_members = bookable_members, class_types = class_type_repository.select_all() )
 
 
 # EDIT
