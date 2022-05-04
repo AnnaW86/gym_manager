@@ -16,6 +16,15 @@
         <input type="number" id="membership_number" name="membership_number" required />
     </div>
     <div>
+        <label for="membership_type">Membership type:</label>
+        <select name="membership_type" id="membership_type">
+            {% for membership_type in membership_types %}
+                <option value="{{ membership_type.id }}">{{ membership_type.title.capitalize()}}</option>                    
+            {% endfor %}
+        </select>
+
+    </div>
+    <div>
         <button type="submit">Add Member</button>
     </div>
 

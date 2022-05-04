@@ -17,7 +17,8 @@ def members():
 @members_blueprint.route("/members/new")
 def new_member():
     members = member_repository.select_all()
-    return render_template("members/new.html", members = members, class_types = class_type_repository.select_all())
+    membership_types = membership_type_repository.select_all()
+    return render_template("members/new.html", members = members, membership_types = membership_types, class_types = class_type_repository.select_all())
 
 # CREATE
 @members_blueprint.route("/members", methods=['POST'])
@@ -25,7 +26,9 @@ def create_member():
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     membership_number = request.form['membership_number']
-    member = Member(first_name, last_name, membership_number)
+    membership_type_id = request.form['membership_type']
+    membership_type = membership_type_repository.select(membership_type_id)
+    member = Member(first_name, last_name, membership_number, membership_type)
     member_repository.save(member)
     return redirect('/members')
 

@@ -13,32 +13,32 @@ CREATE TABLE membership_types (
 
 CREATE TABLE members (
     id SERIAL PRIMARY KEY,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    membership_number INT,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    membership_number INT NOT NULL,
     membership_type_id INT references membership_types(id),
     active_status BOOLEAN
 );
 
 CREATE TABLE class_types (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255),
-    intensity INT,
+    title VARCHAR(255) NOT NULL,
+    intensity INT NOT NULL,
     description VARCHAR(255)
 );
 
 CREATE TABLE locations (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE gym_classes (
     id SERIAL PRIMARY KEY,
     class_type_id INT REFERENCES class_types(id),
-    start_time VARCHAR(255),
-    duration INT,
+    start_time VARCHAR(255) NOT NULL,
+    duration INT NOT NULL,
     location_id INT REFERENCES locations(id),
-    capacity INT
+    capacity INT NOT NULL
 );
 
 CREATE TABLE bookings (
