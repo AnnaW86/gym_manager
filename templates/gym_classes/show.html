@@ -60,10 +60,10 @@
             <p>There are currently no bookings for this session</p>
     
             {% else %}
-            {% for attendee in attendees %}
+            {% for member in enrolled_members %}
                 <div class="attendee">
-                    <p><a href="/members/{{ attendee.id }}">{{ attendee.get_full_name() }}</a></p>
-                        <form action="{{ attendee.id }}/delete_booking" method='POST'>
+                    <p><a href="/members/{{ member.id }}">{{ member.get_full_name() }}</a></p>
+                        <form action="{{ member.id }}/delete_booking" method='POST'>
                         <button class="delete_button"><span class="material-symbols-outlined">
                             disabled_by_default
                             </span></button>

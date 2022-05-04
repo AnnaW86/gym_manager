@@ -41,13 +41,12 @@ def create_class(id):
 def show_gym_class(id):
     gym_class = gym_class_repository.select(id)
     number_of_attendees = member_repository.find_number_of_attendees(id)
-    attendees = member_repository.select_all_by_gym_class(id)
     availability = gym_class_repository.available_places(gym_class)
     members =  member_repository.select_all_active()
     enrolled_members = member_repository.select_all_by_gym_class(id)
     unbooked_members = member_repository.get_members_without_booking(members, enrolled_members)
     bookable_members = member_repository.find_bookable_members(gym_class, unbooked_members)
-    return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, attendees = attendees, availability = availability, bookable_members = bookable_members, class_types = class_type_repository.select_all() )
+    return render_template("gym_classes/show.html", gym_class = gym_class, number_of_attendees = number_of_attendees, enrolled_members = enrolled_members, availability = availability, bookable_members = bookable_members, class_types = class_type_repository.select_all() )
 
 
 # EDIT
